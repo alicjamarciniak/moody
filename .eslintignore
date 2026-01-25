@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build output
+.expo/
+.expo-shared/
+dist/
+build/
+web-build/
+
+# Metro bundler
+.metro-health-check*
+
+# Native
+android/
+ios/
+
+# Config files
+babel.config.js
+metro.config.js
+tailwind.config.js
+
+# Misc
+coverage/
+.DS_Store
+*.log
+*.lock
+.env
+.env.*

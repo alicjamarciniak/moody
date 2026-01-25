@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Build output
+.expo/
+.expo-shared/
+dist/
+build/
+web-build/
+
+# Metro bundler
+.metro-health-check*
+
+# Native
+android/
+ios/
+
+# Lockfiles
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Misc
+coverage/
+.DS_Store
+*.log
+.env
+.env.*
