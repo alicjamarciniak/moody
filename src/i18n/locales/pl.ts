@@ -31,7 +31,7 @@ export default {
   },
   moods: {
     awesome: 'Wspaniale',
-    great: 'Świetnie',
+    good: 'Świetnie',
     okay: 'W porządku',
     bad: 'Źle',
     awful: 'Okropnie',

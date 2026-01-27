@@ -1,18 +1,37 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { MOODS } from '../types/mood';
+import Animated from 'react-native-reanimated';
+import { Text } from '../components/Text';
+import { MOOD_KEYS, MOODS } from '../types/mood';
 import { RootStackParamList } from '../types/navigation';
 import { LanguageSwitcher } from '../components/LanguageSwitcher';
+import { useBackgroundColorAnimation } from '../hooks/useBackgroundColorAnimation';
+import { colors } from '../theme/colors';
+import { darkTheme, lightTheme } from '@/theme/theme';
+
+const colorMap: Record<string, { light: string; dark: string }> = MOOD_KEYS.reduce(
+  (acc, key) => {
+    acc[key] = { light: lightTheme.colors[key], dark: darkTheme.colors[key] };
+    return acc;
+  },
+  {} as Record<string, { light: string; dark: string }>
+);
 
 type WelcomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Welcome'>;
 
 export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
   const { t } = useTranslation();
   const [selectedMood, setSelectedMood] = useState<number | null>(null);
+  const [bgColor, setBgColor] = useState<string>('okay');
+
+  const animatedStyle = useBackgroundColorAnimation({
+    mood: bgColor,
+    colorMap,
+  });
 
   const handleSave = () => {
     if (selectedMood !== null) {
@@ -26,78 +45,87 @@ export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-primary dark:bg-primary-dark">
-      <StatusBar style="light" />
+    <Animated.View style={[{ flex: 1 }, animatedStyle]}>
+      <SafeAreaView className="flex-1">
+        <StatusBar style="light" />
 
-      {/* Language Switcher */}
-      <View className="absolute top-4 right-4 z-10">
-        <LanguageSwitcher />
-      </View>
+        {/* Language Switcher */}
+        <View className="absolute top-4 right-4 z-10">
+          <LanguageSwitcher />
+        </View>
 
-      <View className="flex-1 items-center justify-center px-8">
-        <Text
-          className="text-3xl font-bold text-dark dark:text-light mb-10 text-center"
-          style={{ fontFamily: 'Roboto_700Bold' }}
-        >
-          {t('welcome.title')}
-        </Text>
+        <View className="flex-1 items-center justify-center px-4">
+          <Text className="text-xl text-dark dark:text-light mb-10 text-center">
+            {t('welcome.title')}
+          </Text>
 
-        <View className="w-full gap-4">
-          {MOODS.map((mood) => (
-            <TouchableOpacity
-              key={mood.value}
-              className={`flex-row items-center p-5 rounded-2xl border-2
+          <View className="w-full gap-2 flex-row flex-wrap justify-center">
+            {MOODS.map((_, i) => i)
+              .filter((i) => i % 3 === 0)
+              .map((i) => (
+                <View key={i} className="flex-row gap-2">
+                  {/* slice into rows with max 3 items */}
+                  {MOODS.slice(i, i + 3).map((mood) => (
+                    <TouchableOpacity
+                      key={mood.value}
+                      className={`flex-row items-center px-4 py-2 rounded-full border-2
                  ${
                    selectedMood === mood.value
-                     ? 'bg-primary-dark dark:bg-primary border-none'
+                     ? 'bg-primary-dark dark:bg-primary border-transparent'
                      : 'border-primary-dark dark:border-primary'
                  }`}
-              onPress={() => setSelectedMood(mood.value)}
-            >
-              <Text
-                className={`text-xl font-semibold dark:text-dark text-light
+                      onPress={() => {
+                        setSelectedMood(mood.value);
+                        setBgColor(mood.color);
+                      }}
+                    >
+                      <Text
+                        weight="medium"
+                        className={`text-xs
                   ${
                     selectedMood === mood.value
                       ? 'text-light dark:text-dark '
                       : 'text-dark dark:text-light'
                   }`}
-                style={{ fontFamily: 'Roboto_500Medium' }}
-              >
-                {t(`moods.${mood.label.toLowerCase()}`)}
-              </Text>
-            </TouchableOpacity>
-          ))}
+                      >
+                        {t(`moods.${mood.label}`)}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              ))}
+          </View>
         </View>
-      </View>
 
-      <View className="flex-row px-8 pb-10 gap-3">
-        <TouchableOpacity
-          className="flex-1 bg-transparent border-2 border-dark dark:border-light py-4 rounded-xl items-center"
-          onPress={handleSkip}
-        >
-          <Text
-            className="text-base font-bold text-dark dark:text-light"
-            style={{ fontFamily: 'Roboto_700Bold' }}
+        <View className="flex-row px-8 pb-10 gap-3">
+          <TouchableOpacity
+            className="flex-1 bg-transparent border-2 border-dark dark:border-light py-4 rounded-xl items-center"
+            onPress={handleSkip}
           >
-            {t('common.skip')}
-          </Text>
-        </TouchableOpacity>
+            <Text
+              weight="bold"
+              className="text-base font-bold text-dark dark:text-light"
+            >
+              {t('common.skip')}
+            </Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          className={`flex-1 py-4 rounded-xl items-center
+          <TouchableOpacity
+            className={`flex-1 py-4 rounded-xl items-center
             bg-primary-dark disabled:bg-primary-dark/50
             dark:bg-primary dark:disabled:bg-primary/50`}
-          onPress={handleSave}
-          disabled={selectedMood === null}
-        >
-          <Text
-            className="text-base font-bold text-light dark:text-dark"
-            style={{ fontFamily: 'Roboto_700Bold' }}
+            onPress={handleSave}
+            disabled={selectedMood === null}
           >
-            {t('common.save')}
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+            <Text
+              weight="bold"
+              className="text-base font-bold text-light dark:text-dark"
+            >
+              {t('common.save')}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </Animated.View>
   );
 }

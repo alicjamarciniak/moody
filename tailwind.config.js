@@ -6,11 +6,12 @@ module.exports = {
   content: ['./App.{js,jsx,ts,tsx}', './src/**/*.{js,jsx,ts,tsx}'],
   presets: [require('nativewind/preset')],
   theme: {
+    fontFamily: { sans: ['Roboto_300Light'] },
     extend: {
       colors: {
         primary: {
           DEFAULT: colors.lightYellow[50],
-          dark: colors.charcoalBlue[950],
+          dark: colors.charcoalBlue[900],
         },
         awesome: {
           DEFAULT: colors.bubblegum[500],
@@ -20,11 +21,11 @@ module.exports = {
           DEFAULT: colors.amber[500],
           dark: colors.amber[400],
         },
-        okey: {
+        okay: {
           DEFAULT: colors.emerald[500],
           dark: colors.emerald[400],
         },
-        sad: {
+        bad: {
           DEFAULT: colors.pacific[500],
           dark: colors.pacific[400],
         },
@@ -34,6 +35,11 @@ module.exports = {
         },
         light: colors.light,
         dark: colors.dark,
+      },
+      fontFamily: {
+        roboto: ['Roboto_300Light'],
+        'roboto-medium': ['Roboto_500Medium'],
+        'roboto-bold': ['Roboto_700Bold'],
       },
     },
   },

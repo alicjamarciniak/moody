@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body {
+  font-family: Roboto_300Light;
+}
+
+[data-rnw-text] {
+  font-family: Roboto_300Light !important;
+}

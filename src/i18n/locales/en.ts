@@ -31,7 +31,7 @@ export default {
   },
   moods: {
     awesome: 'Awesome',
-    great: 'Great',
+    good: 'Good',
     okay: 'Okay',
     bad: 'Bad',
     awful: 'Awful',

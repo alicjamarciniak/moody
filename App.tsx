@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   useFonts,
-  Roboto_400Regular,
+  Roboto_300Light,
   Roboto_500Medium,
   Roboto_700Bold,
 } from '@expo-google-fonts/roboto';
@@ -21,7 +21,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    Roboto_400Regular,
+    Roboto_300Light,
     Roboto_500Medium,
     Roboto_700Bold,
   });

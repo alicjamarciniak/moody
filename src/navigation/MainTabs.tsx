@@ -1,6 +1,6 @@
-import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTranslation } from 'react-i18next';
+import { Text } from '../components/Text';
 import HomeScreen from '../screens/HomeScreen';
 import MoodEntryScreen from '../screens/MoodEntryScreen';
 import CalendarScreen from '../screens/CalendarScreen';

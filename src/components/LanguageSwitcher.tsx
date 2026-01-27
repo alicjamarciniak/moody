@@ -1,4 +1,5 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
+import { Text } from './Text';
 import { useLanguage } from '../context/LanguageContext';
 
 export function LanguageSwitcher() {
@@ -15,6 +16,7 @@ export function LanguageSwitcher() {
         }`}
       >
         <Text
+          weight="medium"
           className={`font-semibold ${
             language === 'en' ? 'text-dark dark:text-light' : 'text-dark/50 dark:text-light/50'
           }`}
@@ -32,6 +34,7 @@ export function LanguageSwitcher() {
         }`}
       >
         <Text
+          weight="medium"
           className={`font-semibold ${
             language === 'pl' ? 'text-dark dark:text-light' : 'text-dark/50 dark:text-light/50'
           }`}

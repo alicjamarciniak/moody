@@ -1,8 +1,9 @@
+export const MOOD_KEYS = ['awful', 'bad', 'okay', 'good', 'awesome'] as const;
+
 export interface MoodEntry {
   id: string;
   value: number;
   label: string;
-  emoji: string;
   date: string;
   timestamp: number;
   note?: string;
@@ -10,14 +11,12 @@ export interface MoodEntry {
 
 export interface MoodOption {
   label: string;
-  emoji: string;
   value: number;
+  color: string;
 }
 
-export const MOODS: MoodOption[] = [
-  { label: 'Awesome', emoji: '😄', value: 5 },
-  { label: 'Great', emoji: '😊', value: 4 },
-  { label: 'Okay', emoji: '😐', value: 3 },
-  { label: 'Bad', emoji: '😞', value: 2 },
-  { label: 'Awful', emoji: '😢', value: 1 },
-];
+export const MOODS: MoodOption[] = MOOD_KEYS.map((key, index) => ({
+  label: key,
+  value: index,
+  color: key,
+}));
