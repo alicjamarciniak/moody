@@ -6,6 +6,8 @@ export default {
     confirm: 'Confirm',
     delete: 'Delete',
     edit: 'Edit',
+    error: 'Error',
+    saveFailed: 'Failed to save. Please try again.',
   },
   welcome: {
     title: 'How are you feeling today?',
@@ -16,6 +18,7 @@ export default {
     switchTheme: 'Switch to {{mode}} Mode',
     light: 'Light',
     dark: 'Dark',
+    noMoods: 'No moods recorded yet.\nStart tracking how you feel!',
   },
   moodEntry: {
     title: 'How are you feeling?',

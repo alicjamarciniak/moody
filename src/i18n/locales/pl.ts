@@ -6,6 +6,8 @@ export default {
     confirm: 'Potwierdź',
     delete: 'Usuń',
     edit: 'Edytuj',
+    error: 'Błąd',
+    saveFailed: 'Nie udało się zapisać. Spróbuj ponownie.',
   },
   welcome: {
     title: 'Jak się dzisiaj czujesz?',
@@ -16,6 +18,7 @@ export default {
     switchTheme: 'Przełącz na tryb {{mode}}',
     light: 'jasny',
     dark: 'ciemny',
+    noMoods: 'Brak zapisanych nastrojów.\nZacznij śledzić swoje samopoczucie!',
   },
   moodEntry: {
     title: 'Jak się czujesz?',

@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,14 +12,16 @@ import { LanguageSwitcher } from '../components/LanguageSwitcher';
 import { useBackgroundColorAnimation } from '../hooks/useBackgroundColorAnimation';
 import { colors } from '../theme/colors';
 import { darkTheme, lightTheme } from '@/theme/theme';
+import { saveMood } from '../services/moodService';
 
-const colorMap: Record<string, { light: string; dark: string }> = MOOD_KEYS.reduce(
-  (acc, key) => {
-    acc[key] = { light: lightTheme.colors[key], dark: darkTheme.colors[key] };
-    return acc;
-  },
-  {} as Record<string, { light: string; dark: string }>
-);
+const colorMap: Record<string, { light: string; dark: string }> =
+  MOOD_KEYS.reduce(
+    (acc, key) => {
+      acc[key] = { light: lightTheme.colors[key], dark: darkTheme.colors[key] };
+      return acc;
+    },
+    {} as Record<string, { light: string; dark: string }>
+  );
 
 type WelcomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Welcome'>;
 
@@ -33,10 +35,38 @@ export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
     colorMap,
   });
 
-  const handleSave = () => {
-    if (selectedMood !== null) {
-      // TODO: Save mood to context/storage
-      navigation.navigate('Main');
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSave = async () => {
+    if (selectedMood === null) return;
+
+    setIsSaving(true);
+    try {
+      const mood = MOODS[selectedMood];
+      console.log('Saving mood...', mood);
+      const savePromise = saveMood('temp-user-id', {
+        value: mood.value,
+        label: mood.label,
+        date: new Date().toISOString().split('T')[0],
+        timestamp: Date.now(),
+      });
+
+      // Add timeout to detect hanging
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Save timeout - check Firestore setup')), 10000)
+      );
+
+      await Promise.race([savePromise, timeoutPromise]);
+      console.log('Mood saved, navigating...');
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Main' }],
+      });
+    } catch (error) {
+      console.error('Failed to save mood:', error);
+      Alert.alert(t('common.error'), t('common.saveFailed'));
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -115,7 +145,7 @@ export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
             bg-primary-dark disabled:bg-primary-dark/50
             dark:bg-primary dark:disabled:bg-primary/50`}
             onPress={handleSave}
-            disabled={selectedMood === null}
+            disabled={selectedMood === null || isSaving}
           >
             <Text
               weight="bold"
