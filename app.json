@@ -28,6 +28,9 @@
       "favicon": "./assets/adaptive-moody-logo.png",
       "bundler": "metro"
     },
-    "plugins": ["expo-localization"]
+    "plugins": [
+      "expo-localization",
+      "@react-native-firebase/app"
+    ]
   }
 }
