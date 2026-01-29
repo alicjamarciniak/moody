@@ -14,16 +14,21 @@ import {
   HomeScreen,
 } from '@/screens';
 import { MainTabParamList } from '../types/navigation';
+import { useTheme } from '../context/ThemeContext';
 import { CustomTabBar } from './CustomTabBar';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
 export function MainTabs() {
+  const { isDark } = useTheme();
+
   return (
     <Tab.Navigator
       tabBar={(props) => <CustomTabBar {...props} />}
       screenOptions={{
+        tabBarActiveTintColor: '#10b981',
+        tabBarInactiveTintColor: isDark ? '#9ca3af' : '#666',
         headerShown: false,
       }}
     >

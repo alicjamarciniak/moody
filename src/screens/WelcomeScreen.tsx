@@ -10,14 +10,13 @@ import { MOOD_KEYS, MOODS } from '../types/mood';
 import { RootStackParamList } from '../types/navigation';
 import { LanguageSwitcher } from '../components/LanguageSwitcher';
 import { useBackgroundColorAnimation } from '../hooks/useBackgroundColorAnimation';
-import { colors } from '../theme/colors';
 import { darkTheme, lightTheme } from '@/theme/theme';
 import { saveMood } from '../services/moodService';
 
 const colorMap: Record<string, { light: string; dark: string }> =
   MOOD_KEYS.reduce(
     (acc, key) => {
-      acc[key] = { light: lightTheme.colors[key], dark: darkTheme.colors[key] };
+      acc[key] = { light: lightTheme[key], dark: darkTheme[key] };
       return acc;
     },
     {} as Record<string, { light: string; dark: string }>
@@ -53,7 +52,10 @@ export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
 
       // Add timeout to detect hanging
       const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Save timeout - check Firestore setup')), 10000)
+        setTimeout(
+          () => reject(new Error('Save timeout - check Firestore setup')),
+          10000
+        )
       );
 
       await Promise.race([savePromise, timeoutPromise]);
