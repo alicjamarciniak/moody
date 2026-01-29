@@ -1,5 +1,5 @@
 import './global.css';
-import './src/i18n/config';
+import './src/lib/i18n/config';
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';

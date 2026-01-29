@@ -17,8 +17,8 @@ export type MoodColors = {
 export const lightTheme = {
   bg: colors.light,
   primary: colors.light,
-  awesome: colors.bubblegum[400],
-  good: colors.amber[400],
+  awesome: colors.bubblegum[300],
+  good: colors.amber[300],
   okay: colors.emerald[600],
   bad: colors.pacific[600],
   awful: colors.dustyGrape[400],

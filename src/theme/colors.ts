@@ -64,8 +64,8 @@ export const colors = {
     50: '#fde8ed',
     100: '#fbd0da',
     200: '#f7a1b5',
-    300: '#f37290',
-    400: '#ef436b', // bubble light
+    300: '#f37290', // bubble light
+    400: '#ef436b',
     500: '#eb1446',
     600: '#bc1038',
     700: '#8d0c2a',
