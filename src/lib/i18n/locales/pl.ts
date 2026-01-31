@@ -57,8 +57,12 @@ export default {
       sunday: 'Ndz',
     },
   },
+  entries: {
+    noEntries: 'Brak wpisów.\nZacznij śledzić nastroje i zapisywać myśli!',
+  },
   note: {
     title: 'Napisz notatkę',
+    titlePlaceholder: 'Tytuł (opcjonalnie)',
     placeholder: 'Co masz na myśli?',
     save: 'Zapisz notatkę',
     widget: 'Napisz notatkę...',

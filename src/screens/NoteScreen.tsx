@@ -15,6 +15,7 @@ export default function NoteScreen() {
   const { t } = useTranslation();
   const { isDark } = useTheme();
   const navigation = useNavigation();
+  const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [isSaving, setIsSaving] = useState(false);
 
@@ -25,7 +26,9 @@ export default function NoteScreen() {
     setIsSaving(true);
     try {
       const now = new Date();
+      const trimmedTitle = title.trim();
       await saveNote('temp-user-id', {
+        ...(trimmedTitle ? { title: trimmedTitle } : {}),
         text: trimmed,
         date: now.toISOString().split('T')[0],
         timestamp: now.getTime(),
@@ -67,8 +70,20 @@ export default function NoteScreen() {
       <View className="flex-1 px-5 pt-2">
         <View className="flex-1 p-5 rounded-2xl bg-white dark:bg-gray-800">
           <TextInput
-            multiline
             autoFocus
+            placeholder={t('note.titlePlaceholder')}
+            placeholderTextColor={placeholderColor}
+            value={title}
+            onChangeText={setTitle}
+            style={{
+              color: textColor,
+              fontSize: 20,
+              fontFamily: 'Roboto_700Bold',
+              marginBottom: 12,
+            }}
+          />
+          <TextInput
+            multiline
             placeholder={t('note.placeholder')}
             placeholderTextColor={placeholderColor}
             value={text}

@@ -57,8 +57,12 @@ export default {
       sunday: 'Sun',
     },
   },
+  entries: {
+    noEntries: 'No entries yet.\nStart tracking your moods and thoughts!',
+  },
   note: {
     title: 'Write a note',
+    titlePlaceholder: 'Title (optional)',
     placeholder: 'What\'s on your mind?',
     save: 'Save note',
     widget: 'Write a note...',
