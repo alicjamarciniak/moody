@@ -39,6 +39,20 @@ export default {
     bad: 'Bad',
     awful: 'Awful',
   },
+  time: {
+    morning: 'Morning',
+    afternoon: 'Afternoon',
+    evening: 'Evening',
+    days: {
+      monday: 'Mon',
+      tuesday: 'Tue',
+      wednesday: 'Wed',
+      thursday: 'Thu',
+      friday: 'Fri',
+      saturday: 'Sat',
+      sunday: 'Sun',
+    },
+  },
   tabs: {
     home: 'Home',
     moodEntry: 'Mood Entry',

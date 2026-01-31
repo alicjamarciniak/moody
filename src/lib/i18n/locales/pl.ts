@@ -39,6 +39,20 @@ export default {
     bad: 'Źle',
     awful: 'Okropnie',
   },
+  time: {
+    morning: 'Rano',
+    afternoon: 'Popołudnie',
+    evening: 'Wieczór',
+    days: {
+      monday: 'Pon',
+      tuesday: 'Wt',
+      wednesday: 'Śr',
+      thursday: 'Czw',
+      friday: 'Pt',
+      saturday: 'Sob',
+      sunday: 'Ndz',
+    },
+  },
   tabs: {
     home: 'Główna',
     moodEntry: 'Nastrój',
