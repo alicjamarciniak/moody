@@ -19,6 +19,7 @@ export default {
     light: 'Light',
     dark: 'Dark',
     noMoods: 'No moods recorded yet.\nStart tracking how you feel!',
+    timeline: 'Your Week',
   },
   moodEntry: {
     title: 'How are you feeling?',

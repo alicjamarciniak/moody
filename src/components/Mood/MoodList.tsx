@@ -1,36 +1,19 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { t } from 'i18next';
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { View, ActivityIndicator, ScrollView } from 'react-native';
 import { MoodCard } from './MoodCard';
 import { MoodEntry } from '@/types/mood';
 import { Text } from '@/components/Text';
-import { getUserMoods } from '@/services/moodService';
-import { useFocusEffect } from '@react-navigation/native';
 import { useTheme } from '@/context/ThemeContext';
 
-const MoodList = () => {
-  const [moods, setMoods] = useState<MoodEntry[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+interface MoodListProps {
+  moods: MoodEntry[];
+  isLoading: boolean;
+}
+
+const MoodList = ({ moods, isLoading }: MoodListProps) => {
   const { isDark } = useTheme();
-
-  const fetchMoods = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      const data = await getUserMoods('temp-user-id');
-      setMoods(data);
-    } catch (error) {
-      console.error('Failed to fetch moods:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  useFocusEffect(
-    useCallback(() => {
-      fetchMoods();
-    }, [fetchMoods])
-  );
 
   return (
     <View className="px-5">

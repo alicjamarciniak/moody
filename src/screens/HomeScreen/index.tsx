@@ -4,21 +4,35 @@ import { StatusBar } from 'expo-status-bar';
 import { useTranslation } from 'react-i18next';
 import { Text } from '../../components/Text';
 import { useTheme } from '../../context/ThemeContext';
-import { LanguageSwitcher } from '../../components/LanguageSwitcher';
 import MoodList from '@/components/Mood/MoodList';
+import { Timeline } from '@/components/Timeline';
+import { useMoods } from '@/hooks/useMoods';
 import Header from './Header';
 
 export default function HomeScreen() {
   const { t } = useTranslation();
   const { isDark, toggleTheme } = useTheme();
+  const { moods, isLoading } = useMoods();
 
   return (
     <SafeAreaView className="flex-1 bg-gray-100 dark:bg-gray-900">
       <StatusBar style={isDark ? 'light' : 'dark'} />
 
       <Header />
+
+      {/* Timeline Card */}
+      <View className="mx-5 mb-3 p-6 rounded-2xl bg-white dark:bg-gray-800">
+        <Text
+          weight="bold"
+          className="text-sm text-gray-600 dark:text-gray-400 mb-3"
+        >
+          {t('home.timeline')}
+        </Text>
+        <Timeline days={7} moods={moods} futureDays={2} />
+      </View>
+
       <View className="h-[300px]">
-        <MoodList />
+        <MoodList moods={moods} isLoading={isLoading} />
       </View>
 
       {/* Theme Toggle */}
