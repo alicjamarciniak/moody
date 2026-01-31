@@ -7,6 +7,7 @@ import { useTheme } from '../../context/ThemeContext';
 import MoodList from '@/components/Mood/MoodList';
 import { Timeline } from '@/components/Timeline';
 import { useMoods } from '@/hooks/useMoods';
+import { MoodSummaryWidget } from '@/components/MoodSummaryWidget';
 import Header from './Header';
 
 export default function HomeScreen() {
@@ -29,6 +30,11 @@ export default function HomeScreen() {
           {t('home.timeline')}
         </Text>
         <Timeline days={7} moods={moods} futureDays={2} />
+      </View>
+
+      {/* Mood Summary Widget */}
+      <View className="mx-5 mb-3">
+        <MoodSummaryWidget moods={moods} />
       </View>
 
       <View className="h-[300px]">

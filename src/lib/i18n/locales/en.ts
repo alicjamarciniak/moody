@@ -20,6 +20,9 @@ export default {
     dark: 'Dark',
     noMoods: 'No moods recorded yet.\nStart tracking how you feel!',
     timeline: 'Your Week',
+    summaryTitle: 'Recently you mostly felt {{mood}}',
+    summaryPositive: 'Keep it up! You\'re doing great.',
+    summaryEncouraging: 'Better days are ahead. Take care of yourself.',
   },
   moodEntry: {
     title: 'How are you feeling?',

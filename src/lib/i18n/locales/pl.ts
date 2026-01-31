@@ -20,6 +20,9 @@ export default {
     dark: 'ciemny',
     noMoods: 'Brak zapisanych nastrojów.\nZacznij śledzić swoje samopoczucie!',
     timeline: 'Twój tydzień',
+    summaryTitle: 'Ostatnio najczęściej czułeś/aś się {{mood}}',
+    summaryPositive: 'Tak trzymaj! Świetnie sobie radzisz.',
+    summaryEncouraging: 'Lepsze dni nadejdą. Zadbaj o siebie.',
   },
   moodEntry: {
     title: 'Jak się czujesz?',
