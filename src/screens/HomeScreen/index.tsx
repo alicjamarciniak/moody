@@ -13,7 +13,7 @@ import Header from './Header';
 export default function HomeScreen() {
   const { t } = useTranslation();
   const { isDark, toggleTheme } = useTheme();
-  const { moods, isLoading } = useMoods();
+  const { moods, isLoading, todayMood, recentMood } = useMoods();
 
   return (
     <SafeAreaView className="flex-1 bg-gray-100 dark:bg-gray-900">
@@ -29,12 +29,12 @@ export default function HomeScreen() {
         >
           {t('home.timeline')}
         </Text>
-        <Timeline days={7} moods={moods} futureDays={2} />
+        <Timeline days={7} moods={moods} futureDays={2} todayMood={todayMood} />
       </View>
 
       {/* Mood Summary Widget */}
       <View className="mx-5 mb-3">
-        <MoodSummaryWidget moods={moods} />
+        <MoodSummaryWidget recentMood={recentMood} />
       </View>
 
       <View className="h-[300px]">

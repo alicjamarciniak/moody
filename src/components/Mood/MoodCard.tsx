@@ -55,10 +55,12 @@ export function MoodCard({ mood }: MoodCardProps) {
 
   return (
     <View
-      className="p-6 rounded-2xl mb-3 flex-row items-center gap-3 overflow-hidden"
-      style={{
-        backgroundColor: `${moodColor}90`,
-      }}
+      className="p-6 rounded-2xl mb-3 flex-row items-center gap-3 overflow-hidden bg-white dark:bg-gray-800"
+      style={
+        {
+          // backgroundColor: `${moodColor}`,
+        }
+      }
     >
       {/* Content */}
       <View className="flex-1 gap-1">
@@ -71,7 +73,7 @@ export function MoodCard({ mood }: MoodCardProps) {
           <Text className="text-sm mr-4" style={{ color: textColor }}>
             {timeStr}
           </Text>
-          {!(today && yesterday) && (
+          {!(today || yesterday) && (
             <Text className="text-sm" style={{ color: textColor }}>
               {t(`time.days.${weekday}`)},
             </Text>
@@ -83,13 +85,11 @@ export function MoodCard({ mood }: MoodCardProps) {
       </View>
 
       {/* Mood icon */}
-      <View className="w-20 h-12 rounded-full items-center justify-center">
-        <FontAwesomeIcon
-          icon={icon}
-          size={140}
-          color={'#ffffff80'}
-          style={{ transform: [{ rotate: '-15deg' }] }}
-        />
+      <View
+        className="w-16 h-16 rounded-full items-center justify-center"
+        style={{ backgroundColor: moodColor + '4D' }}
+      >
+        <FontAwesomeIcon icon={icon} size={35} color={moodColor} />
       </View>
     </View>
   );

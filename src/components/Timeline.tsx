@@ -3,24 +3,9 @@ import { Text } from './Text';
 import { useTheme } from '../context/ThemeContext';
 import { lightTheme, darkTheme, MoodKey } from '../theme/theme';
 import { MoodEntry } from '../types/mood';
+import { getMostFrequentMood } from '../hooks/useMoods';
 
 const WEEKDAY_LETTERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-
-function getMostFrequentMood(entries: MoodEntry[]): string {
-  const counts: Record<string, number> = {};
-  for (const entry of entries) {
-    counts[entry.label] = (counts[entry.label] || 0) + 1;
-  }
-  let maxCount = 0;
-  let maxLabel = entries[0].label;
-  for (const [label, count] of Object.entries(counts)) {
-    if (count > maxCount) {
-      maxCount = count;
-      maxLabel = label;
-    }
-  }
-  return maxLabel;
-}
 
 function toDateKey(date: Date): string {
   return date.toISOString().split('T')[0];
@@ -33,9 +18,11 @@ interface TimelineProps {
   moods: MoodEntry[];
   /** How many future (greyed-out) days to show at the end */
   futureDays?: number;
+  /** Most frequent mood label for today (from useMoods hook) */
+  todayMood?: string | null;
 }
 
-export function Timeline({ days, moods, futureDays = 2 }: TimelineProps) {
+export function Timeline({ days, moods, futureDays = 2, todayMood }: TimelineProps) {
   const { isDark } = useTheme();
   const theme = isDark ? darkTheme : lightTheme;
 
@@ -85,9 +72,12 @@ export function Timeline({ days, moods, futureDays = 2 }: TimelineProps) {
         const entriesForDay = moodsByDate[dateKey];
         const hasMood = !item.isFuture && entriesForDay && entriesForDay.length > 0;
         const moodLabel = hasMood ? getMostFrequentMood(entriesForDay) : null;
+        const todayMoodColor = todayMood ? theme[todayMood as MoodKey] ?? theme.okay : null;
         const circleColor = moodLabel
           ? theme[moodLabel as MoodKey] ?? theme.okay
-          : greyColor;
+          : isToday && todayMoodColor
+            ? todayMoodColor
+            : greyColor;
 
         return (
           <View key={dateKey} className="items-center" style={{ width: 36 }}>

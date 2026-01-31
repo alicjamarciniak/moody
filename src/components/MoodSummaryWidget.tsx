@@ -10,7 +10,6 @@ import {
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTranslation } from 'react-i18next';
 import { Text } from './Text';
-import { MoodEntry } from '../types/mood';
 import { useTheme } from '../context/ThemeContext';
 import { lightTheme, MoodKey } from '../theme/theme';
 
@@ -24,37 +23,16 @@ const moodIcons: Record<string, IconProp> = {
 
 const POSITIVE_MOODS = ['awesome', 'good', 'okay'];
 
-function getMostFrequentMoodLast30Days(moods: MoodEntry[]): string | null {
-  const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
-  const recent = moods.filter((m) => m.timestamp >= thirtyDaysAgo);
-  if (recent.length === 0) return null;
-
-  const counts: Record<string, number> = {};
-  for (const entry of recent) {
-    counts[entry.label] = (counts[entry.label] || 0) + 1;
-  }
-
-  let maxCount = 0;
-  let maxLabel = recent[0].label;
-  for (const [label, count] of Object.entries(counts)) {
-    if (count > maxCount) {
-      maxCount = count;
-      maxLabel = label;
-    }
-  }
-  return maxLabel;
-}
-
 interface MoodSummaryWidgetProps {
-  moods: MoodEntry[];
+  recentMood: string | null;
 }
 
-export function MoodSummaryWidget({ moods }: MoodSummaryWidgetProps) {
+export function MoodSummaryWidget({ recentMood }: MoodSummaryWidgetProps) {
   const { t } = useTranslation();
   const { isDark } = useTheme();
 
-  const topMood = getMostFrequentMoodLast30Days(moods);
-  if (!topMood) return null;
+  if (!recentMood) return null;
+  const topMood = recentMood;
 
   const theme = lightTheme;
   const moodColor = theme[topMood as MoodKey] ?? theme.okay;
@@ -82,7 +60,7 @@ export function MoodSummaryWidget({ moods }: MoodSummaryWidgetProps) {
         <FontAwesomeIcon
           icon={icon}
           size={140}
-          color="#ffffff80"
+          color={moodColor}
           style={{ transform: [{ rotate: '-15deg' }] }}
         />
       </View>
