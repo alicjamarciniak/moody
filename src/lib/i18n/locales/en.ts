@@ -57,6 +57,12 @@ export default {
       sunday: 'Sun',
     },
   },
+  note: {
+    title: 'Write a note',
+    placeholder: 'What\'s on your mind?',
+    save: 'Save note',
+    widget: 'Write a note...',
+  },
   tabs: {
     home: 'Home',
     moodEntry: 'Mood Entry',

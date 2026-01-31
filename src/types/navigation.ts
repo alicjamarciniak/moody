@@ -1,6 +1,7 @@
 export type RootStackParamList = {
   Welcome: undefined;
   Main: undefined;
+  Note: undefined;
 };
 
 export type MainTabParamList = {

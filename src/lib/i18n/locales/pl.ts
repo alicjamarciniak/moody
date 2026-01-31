@@ -57,6 +57,12 @@ export default {
       sunday: 'Ndz',
     },
   },
+  note: {
+    title: 'Napisz notatkę',
+    placeholder: 'Co masz na myśli?',
+    save: 'Zapisz notatkę',
+    widget: 'Napisz notatkę...',
+  },
   tabs: {
     home: 'Główna',
     moodEntry: 'Nastrój',

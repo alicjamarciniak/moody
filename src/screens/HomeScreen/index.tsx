@@ -8,6 +8,7 @@ import MoodList from '@/components/Mood/MoodList';
 import { Timeline } from '@/components/Timeline';
 import { useMoods } from '@/hooks/useMoods';
 import { MoodSummaryWidget } from '@/components/MoodSummaryWidget';
+import { NoteWidget } from '@/components/NoteWidget';
 import Header from './Header';
 
 export default function HomeScreen() {
@@ -35,6 +36,11 @@ export default function HomeScreen() {
       {/* Mood Summary Widget */}
       <View className="mx-5 mb-3">
         <MoodSummaryWidget recentMood={recentMood} />
+      </View>
+
+      {/* Note Widget */}
+      <View className="mx-5 mb-3">
+        <NoteWidget />
       </View>
 
       <View className="h-[300px]">

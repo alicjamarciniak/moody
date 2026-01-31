@@ -1,0 +1,6 @@
+export interface Note {
+  id: string;
+  text: string;
+  date: string;
+  timestamp: number;
+}

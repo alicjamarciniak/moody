@@ -15,6 +15,7 @@ import { LanguageProvider } from './src/context/LanguageContext';
 import { ThemeWrapper } from './src/theme/ThemeWrapper';
 import { MainTabs } from './src/navigation/MainTabs';
 import WelcomeScreen from './src/screens/WelcomeScreen';
+import NoteScreen from './src/screens/NoteScreen';
 import { RootStackParamList } from './src/types/navigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -43,6 +44,7 @@ export default function App() {
               >
                 <Stack.Screen name="Welcome" component={WelcomeScreen} />
                 <Stack.Screen name="Main" component={MainTabs} />
+                <Stack.Screen name="Note" component={NoteScreen} />
               </Stack.Navigator>
             </NavigationContainer>
           </MoodProvider>
