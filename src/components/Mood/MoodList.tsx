@@ -33,7 +33,7 @@ const MoodList = () => {
   );
 
   return (
-    <View className="px-5 h-[300px]">
+    <View className="px-5">
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color="#10b981" />

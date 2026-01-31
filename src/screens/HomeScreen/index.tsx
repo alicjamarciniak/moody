@@ -17,7 +17,9 @@ export default function HomeScreen() {
       <StatusBar style={isDark ? 'light' : 'dark'} />
 
       <Header />
-      <MoodList />
+      <View className="h-[300px]">
+        <MoodList />
+      </View>
 
       {/* Theme Toggle */}
       <View className="px-5 pb-4">

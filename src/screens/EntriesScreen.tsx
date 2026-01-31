@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useTranslation } from 'react-i18next';
 import { Text } from '../components/Text';
 import { useTheme } from '../context/ThemeContext';
+import MoodList from '@/components/Mood/MoodList';
 
 export default function EntriesScreen() {
   const { t } = useTranslation();
@@ -12,8 +13,8 @@ export default function EntriesScreen() {
   return (
     <SafeAreaView className="flex-1 bg-gray-100 dark:bg-gray-900">
       <StatusBar style={isDark ? 'light' : 'dark'} />
-      <View className="flex-1 items-center justify-center p-5">
-        <Text
+      <View className="flex-1 pt-5 pb-10">
+        {/* <Text
           weight="bold"
           className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2"
         >
@@ -21,7 +22,8 @@ export default function EntriesScreen() {
         </Text>
         <Text className="text-base text-gray-600 dark:text-gray-400">
           {t('moodEntry.subtitle')}
-        </Text>
+        </Text> */}
+        <MoodList />
       </View>
     </SafeAreaView>
   );
