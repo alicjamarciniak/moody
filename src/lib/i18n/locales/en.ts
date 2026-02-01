@@ -8,6 +8,8 @@ export default {
     edit: 'Edit',
     error: 'Error',
     saveFailed: 'Failed to save. Please try again.',
+    inProgress: 'Work in progress',
+    inProgressSubtitle: 'This section is still being developed.',
   },
   welcome: {
     title: 'How are you feeling today?',
@@ -32,12 +34,12 @@ export default {
     subtitle: 'Select your mood',
   },
   calendar: {
-    title: 'Calendar',
-    subtitle: 'View your mood history',
+    title: 'Tags',
+    subtitle: 'Organize your moods',
   },
   insights: {
-    title: 'Insights',
-    subtitle: 'Discover your patterns',
+    title: 'Diary',
+    subtitle: 'Your personal journal',
   },
   moods: {
     awesome: 'Awesome',
@@ -61,6 +63,8 @@ export default {
     },
   },
   entries: {
+    title: 'Entries',
+    subtitle: 'Your moods and notes',
     noEntries: 'No entries yet.\nStart tracking your moods and thoughts!',
   },
   noteDetails: {
@@ -97,7 +101,7 @@ export default {
   tabs: {
     home: 'Home',
     moodEntry: 'Mood Entry',
-    calendar: 'Calendar',
-    insights: 'Insights',
+    calendar: 'Tags',
+    insights: 'Diary',
   },
 };

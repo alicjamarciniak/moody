@@ -15,6 +15,7 @@ import { MoodChart } from '../components/MoodChart';
 import { MoodCountChart } from '../components/MoodCountChart';
 import { StatisticsBlocks } from '../components/StatisticsBlocks';
 import { useTheme } from '../context/ThemeContext';
+import { InProgressBanner } from '../components/InProgressBanner';
 import { useMoods } from '../hooks/useMoods';
 
 type Tab = 'month' | 'year';
@@ -189,10 +190,8 @@ export default function OversightScreen() {
             )}
           </View>
         ) : (
-          <View className="flex-1 items-center justify-center">
-            <Text className="text-gray-400 dark:text-gray-500">
-              {t('oversight.year')}
-            </Text>
+          <View className="flex-1 items-center justify-center py-16">
+            <InProgressBanner />
           </View>
         )}
       </ScrollView>

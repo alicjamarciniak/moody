@@ -8,6 +8,8 @@ export default {
     edit: 'Edytuj',
     error: 'Błąd',
     saveFailed: 'Nie udało się zapisać. Spróbuj ponownie.',
+    inProgress: 'Prace w toku',
+    inProgressSubtitle: 'Ta sekcja jest jeszcze w budowie.',
   },
   welcome: {
     title: 'Jak się dzisiaj czujesz?',
@@ -32,12 +34,12 @@ export default {
     subtitle: 'Wybierz swój nastrój',
   },
   calendar: {
-    title: 'Kalendarz',
-    subtitle: 'Zobacz historię swoich nastrojów',
+    title: 'Tagi',
+    subtitle: 'Organizuj swoje nastroje',
   },
   insights: {
-    title: 'Statystyki',
-    subtitle: 'Odkryj swoje wzorce',
+    title: 'Dziennik',
+    subtitle: 'Twój osobisty dziennik',
   },
   moods: {
     awesome: 'Wspaniale',
@@ -61,6 +63,8 @@ export default {
     },
   },
   entries: {
+    title: 'Wpisy',
+    subtitle: 'Twoje nastroje i notatki',
     noEntries: 'Brak wpisów.\nZacznij śledzić nastroje i zapisywać myśli!',
   },
   noteDetails: {
@@ -97,7 +101,7 @@ export default {
   tabs: {
     home: 'Główna',
     moodEntry: 'Nastrój',
-    calendar: 'Kalendarz',
-    insights: 'Statystyki',
+    calendar: 'Tagi',
+    insights: 'Dziennik',
   },
 };
