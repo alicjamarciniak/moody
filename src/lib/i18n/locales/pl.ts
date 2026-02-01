@@ -74,6 +74,18 @@ export default {
     month: 'Miesiąc',
     year: 'Rok',
     widget: 'Przegląd nastrojów',
+    topMood: 'Najczęstszy nastrój',
+    topDaytime: 'Najbardziej aktywny czas',
+    activeDays: 'Aktywne dni',
+    longestStreak: 'Najdłuższa seria',
+    days: 'dni',
+    moodTrend: 'Trend nastrojów',
+    daytime: {
+      morning: 'Ranek',
+      afternoon: 'Popołudnie',
+      evening: 'Wieczór',
+      night: 'Noc',
+    },
   },
   note: {
     title: 'Napisz notatkę',

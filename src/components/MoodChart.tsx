@@ -44,7 +44,7 @@ function getDaysInMonth(year: number, month: number) {
 export function MoodChart({ moods, year, month, scrollToEnd = false }: MoodChartProps) {
   const { t } = useTranslation();
   const { isDark } = useTheme();
-  const theme = isDark ? darkTheme : lightTheme;
+  const theme = lightTheme; // Always use bright colors for better visibility
   const textColor = isDark ? '#9ca3af' : '#6b7280';
   const bgColor = isDark ? '#1f2937' : '#ffffff';
   const ruleColor = isDark ? '#374151' : '#e5e7eb';
@@ -182,20 +182,20 @@ export function MoodChart({ moods, year, month, scrollToEnd = false }: MoodChart
   }, [moods, year, month, isDark, theme, textColor]);
 
   if (!hasData) {
-    return (
-      <View className="flex-1 items-center justify-center p-8">
-        <Text className="text-gray-500 dark:text-gray-400 text-center">
-          {t('home.noMoods')}
-        </Text>
-      </View>
-    );
+    return null;
   }
 
   // Section height for positioning y-axis icons
   const sectionHeight = CHART_HEIGHT / 4;
 
   return (
-    <View className="p-4 rounded-2xl" style={{ backgroundColor: bgColor }}>
+    <View className="p-6 rounded-2xl" style={{ backgroundColor: bgColor }}>
+      <Text
+        weight="bold"
+        className="text-sm text-gray-600 dark:text-gray-400 mb-4"
+      >
+        {t('oversight.moodTrend')}
+      </Text>
       <View className="flex-row">
         {/* Custom Y-axis with face icons */}
         <View

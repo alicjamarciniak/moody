@@ -53,6 +53,46 @@ export function MoodCountChart({ moods, year, month }: MoodCountChartProps) {
 
   const totalMoods = filteredMoods.length;
 
+  // Calculate statistics
+  // 1. Top mood
+  const topMood = moodOrder.reduce((top, key) => {
+    if (!moodCounts[key]) return top;
+    if (!top || moodCounts[key] > moodCounts[top]) return key;
+    return top;
+  }, '' as MoodKey);
+
+  // 2. Top daytime (morning, afternoon, evening, night)
+  const daytimeCounts = filteredMoods.reduce((acc, mood) => {
+    const hour = new Date(mood.timestamp).getHours();
+    let period: string;
+    if (hour >= 5 && hour < 12) period = 'morning';
+    else if (hour >= 12 && hour < 17) period = 'afternoon';
+    else if (hour >= 17 && hour < 21) period = 'evening';
+    else period = 'night';
+    acc[period] = (acc[period] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+
+  const topDaytime = Object.entries(daytimeCounts).reduce(
+    (top, [period, count]) => {
+      if (!top[0] || count > top[1]) return [period, count];
+      return top;
+    },
+    ['', 0] as [string, number]
+  )[0];
+
+  // 3. Mood streak (consecutive days with moods)
+  const daysWithMoods = new Set(
+    filteredMoods.map((mood) => {
+      const date = new Date(mood.timestamp);
+      return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    })
+  );
+  const moodStreak = daysWithMoods.size;
+
+  // 4. Average moods per day
+  const avgMoodsPerDay = moodStreak > 0 ? (totalMoods / moodStreak).toFixed(1) : '0';
+
   // Prepare data for pie chart
   const pieData = moodOrder
     .filter((key) => moodCounts[key] > 0)
@@ -63,6 +103,10 @@ export function MoodCountChart({ moods, year, month }: MoodCountChartProps) {
     }));
 
   const textColor = isDark ? '#f3f4f6' : '#1f2937';
+
+  if (totalMoods === 0) {
+    return null;
+  }
 
   return (
     <View className="p-6 rounded-2xl bg-white dark:bg-gray-800">
@@ -86,14 +130,14 @@ export function MoodCountChart({ moods, year, month }: MoodCountChartProps) {
             <PieChart
               data={pieData}
               donut
-              radius={70}
-              innerRadius={50}
+              radius={56}
+              innerRadius={40}
               innerCircleColor={isDark ? '#1f2937' : '#ffffff'}
               centerLabelComponent={() => (
                 <View className="items-center justify-center">
                   <Text
                     weight="bold"
-                    className="text-4xl"
+                    className="text-3xl"
                     style={{ color: textColor }}
                   >
                     {totalMoods}

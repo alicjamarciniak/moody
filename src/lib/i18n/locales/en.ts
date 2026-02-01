@@ -74,6 +74,18 @@ export default {
     month: 'Month',
     year: 'Year',
     widget: 'Mood overview',
+    topMood: 'Top Mood',
+    topDaytime: 'Most Active Time',
+    activeDays: 'Active Days',
+    longestStreak: 'Longest Streak',
+    days: 'days',
+    moodTrend: 'Mood Trend',
+    daytime: {
+      morning: 'Morning',
+      afternoon: 'Afternoon',
+      evening: 'Evening',
+      night: 'Night',
+    },
   },
   note: {
     title: 'Write a note',
