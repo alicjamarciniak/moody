@@ -24,6 +24,7 @@ export default {
     summaryPositive: 'Świetnie sobie radzisz.',
     summaryEncouraging: 'Lepsze dni nadejdą.',
     seeMore: 'Zobacz więcej',
+    moodHistory: 'Historia nastrojów',
   },
   moodEntry: {
     title: 'Jak się czujesz?',
@@ -66,6 +67,12 @@ export default {
   },
   moodDetails: {
     title: 'Nastrój',
+  },
+  oversight: {
+    title: 'Przegląd',
+    month: 'Miesiąc',
+    year: 'Rok',
+    widget: 'Przegląd nastrojów',
   },
   note: {
     title: 'Napisz notatkę',

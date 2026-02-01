@@ -24,6 +24,7 @@ export default {
     summaryPositive: "You're doing great.",
     summaryEncouraging: 'Better days are ahead.',
     seeMore: 'See more',
+    moodHistory: 'Mood history',
   },
   moodEntry: {
     title: 'How are you feeling?',
@@ -66,6 +67,12 @@ export default {
   },
   moodDetails: {
     title: 'Mood',
+  },
+  oversight: {
+    title: 'Oversight',
+    month: 'Month',
+    year: 'Year',
+    widget: 'Mood overview',
   },
   note: {
     title: 'Write a note',

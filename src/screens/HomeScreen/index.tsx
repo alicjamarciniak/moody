@@ -1,4 +1,4 @@
-import { View, TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +9,7 @@ import { Timeline } from '@/components/Timeline';
 import { useMoods } from '@/hooks/useMoods';
 import { MoodSummaryWidget } from '@/components/MoodSummaryWidget';
 import { NoteWidget } from '@/components/NoteWidget';
+import { OversightWidget } from '@/components/OversightWidget';
 import Header from './Header';
 
 export default function HomeScreen() {
@@ -43,6 +44,12 @@ export default function HomeScreen() {
         </View>
       </View>
 
+      {/* Oversight Widget */}
+      <View className="mx-5 mb-3 h-24 flex">
+        <OversightWidget />
+      </View>
+
+      {/* Mood List in remaining space */}
       <View className="flex-1">
         <MoodList moods={moods} isLoading={isLoading} limit={5} />
       </View>

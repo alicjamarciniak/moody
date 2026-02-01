@@ -1,7 +1,12 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { t } from 'i18next';
 import React from 'react';
-import { View, ActivityIndicator, ScrollView, TouchableOpacity } from 'react-native';
+import {
+  View,
+  ActivityIndicator,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { MoodCard } from './MoodCard';
@@ -24,6 +29,9 @@ const MoodList = ({ moods, isLoading, limit }: MoodListProps) => {
 
   return (
     <View className="px-5">
+      <Text weight="bold" className="text-lg text-gray-600 dark:text-gray-400">
+        {t('home.moodHistory')}
+      </Text>
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color="#10b981" />
@@ -41,7 +49,7 @@ const MoodList = ({ moods, isLoading, limit }: MoodListProps) => {
             contentContainerStyle={{ paddingVertical: 16 }}
           >
             {displayedMoods.map((item) => (
-              <MoodCard key={item.id} mood={item} />
+              <MoodCard key={item.id} mood={item} variant="sm" />
             ))}
             {hasMore && (
               <TouchableOpacity
