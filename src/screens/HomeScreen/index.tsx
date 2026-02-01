@@ -1,4 +1,4 @@
-import { TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { useTranslation } from 'react-i18next';
@@ -14,7 +14,7 @@ import Header from './Header';
 
 export default function HomeScreen() {
   const { t } = useTranslation();
-  const { isDark, toggleTheme } = useTheme();
+  const { isDark } = useTheme();
   const { moods, isLoading, todayMood, recentMood } = useMoods();
 
   return (
@@ -52,20 +52,6 @@ export default function HomeScreen() {
       {/* Mood List in remaining space */}
       <View className="flex-1">
         <MoodList moods={moods} isLoading={isLoading} limit={5} />
-      </View>
-
-      {/* Theme Toggle */}
-      <View className="px-5 pb-4">
-        <TouchableOpacity
-          onPress={toggleTheme}
-          className="bg-primary py-3 rounded-xl items-center mt-5"
-        >
-          <Text weight="medium" className="text-black font-semibold">
-            {t('home.switchTheme', {
-              mode: t(isDark ? 'home.light' : 'home.dark'),
-            })}
-          </Text>
-        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

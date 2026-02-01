@@ -12,7 +12,7 @@ import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { MoodCard } from './MoodCard';
 import { MoodEntry } from '@/types/mood';
 import { Text } from '@/components/Text';
-import { useTheme } from '@/context/ThemeContext';
+import { useColorScheme } from 'nativewind';
 import { MainTabParamList } from '@/types/navigation';
 import { colors } from '@/theme/colors';
 
@@ -23,7 +23,8 @@ interface MoodListProps {
 }
 
 const MoodList = ({ moods, isLoading, limit }: MoodListProps) => {
-  const { isDark } = useTheme();
+  const { colorScheme } = useColorScheme();
+  const isDark = colorScheme === 'dark';
   const navigation = useNavigation<BottomTabNavigationProp<MainTabParamList>>();
   const displayedMoods = limit ? moods.slice(0, limit) : moods;
   const hasMore = limit ? moods.length > limit : false;

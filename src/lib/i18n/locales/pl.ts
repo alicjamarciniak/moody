@@ -78,8 +78,8 @@ export default {
     month: 'Miesiąc',
     year: 'Rok',
     widget: 'Przegląd nastrojów',
-    topMood: 'Najczęstszy nastrój',
-    topDaytime: 'Najbardziej aktywny czas',
+    topMood: 'Głównie czułeś się',
+    topDaytime: 'Główna aktywność',
     activeDays: 'Aktywne dni',
     longestStreak: 'Najdłuższa seria',
     days: 'dni',
@@ -97,6 +97,10 @@ export default {
     placeholder: 'Co masz na myśli?',
     save: 'Zapisz notatkę',
     widget: 'Dodaj notatkę',
+  },
+  settings: {
+    title: 'Ustawienia',
+    language: 'Język',
   },
   tabs: {
     home: 'Główna',

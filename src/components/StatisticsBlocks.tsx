@@ -164,7 +164,7 @@ export function StatisticsBlocks({
       {statistics.map((stat, index) => (
         <View
           key={index}
-          className="flex-1 min-w-[45%] px-6 py-3 rounded-xl flex-row"
+          className="flex-1 min-w-[45%] px-3 py-3 rounded-xl flex-row"
           style={{ backgroundColor: cardBg }}
         >
           <View

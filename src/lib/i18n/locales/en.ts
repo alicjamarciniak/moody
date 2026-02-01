@@ -98,6 +98,10 @@ export default {
     save: 'Save note',
     widget: 'Write a note',
   },
+  settings: {
+    title: 'Settings',
+    language: 'Language',
+  },
   tabs: {
     home: 'Home',
     moodEntry: 'Mood Entry',

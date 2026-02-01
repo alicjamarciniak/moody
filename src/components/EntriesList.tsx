@@ -9,7 +9,7 @@ import { NoteCard } from './NoteCard';
 import { MoodEntry } from '@/types/mood';
 import { Note } from '@/types/note';
 import { Text } from '@/components/Text';
-import { useTheme } from '@/context/ThemeContext';
+import { useColorScheme } from 'nativewind';
 import { RootStackParamList } from '@/types/navigation';
 
 type EntryItem =
@@ -24,7 +24,8 @@ interface EntriesListProps {
 
 const EntriesList = ({ moods, notes, isLoading }: EntriesListProps) => {
   const { t } = useTranslation();
-  const { isDark } = useTheme();
+  const { colorScheme } = useColorScheme();
+  const isDark = colorScheme === 'dark';
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const entries = useMemo(() => {
