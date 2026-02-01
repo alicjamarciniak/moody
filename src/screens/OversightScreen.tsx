@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -8,6 +8,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTranslation } from 'react-i18next';
 import { Text } from '../components/Text';
 import { MoodChart } from '../components/MoodChart';
+import { MoodCountChart } from '../components/MoodCountChart';
 import { useTheme } from '../context/ThemeContext';
 import { useMoods } from '../hooks/useMoods';
 
@@ -96,7 +97,7 @@ export default function OversightScreen() {
       </View>
 
       {/* Content */}
-      <View className="flex-1 px-5">
+      <ScrollView className="flex-1 px-5" showsVerticalScrollIndicator={false}>
         {activeTab === 'month' ? (
           <View>
             {/* Month Switcher */}
@@ -125,6 +126,11 @@ export default function OversightScreen() {
               </TouchableOpacity>
             </View>
             <MoodChart key={`${selectedYear}-${selectedMonth}`} moods={moods} year={selectedYear} month={selectedMonth} scrollToEnd={scrollToEnd} />
+
+            {/* Mood Count Chart */}
+            <View className="mt-4">
+              <MoodCountChart moods={moods} year={selectedYear} month={selectedMonth} />
+            </View>
           </View>
         ) : (
           <View className="flex-1 items-center justify-center">
@@ -133,7 +139,7 @@ export default function OversightScreen() {
             </Text>
           </View>
         )}
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

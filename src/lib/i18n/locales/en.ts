@@ -25,6 +25,7 @@ export default {
     summaryEncouraging: 'Better days are ahead.',
     seeMore: 'See more',
     moodHistory: 'Mood history',
+    moodCount: 'Mood Count',
   },
   moodEntry: {
     title: 'How are you feeling?',

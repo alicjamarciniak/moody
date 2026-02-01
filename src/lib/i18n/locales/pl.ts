@@ -25,6 +25,7 @@ export default {
     summaryEncouraging: 'Lepsze dni nadejdą.',
     seeMore: 'Zobacz więcej',
     moodHistory: 'Historia nastrojów',
+    moodCount: 'Liczba nastrojów',
   },
   moodEntry: {
     title: 'Jak się czujesz?',
