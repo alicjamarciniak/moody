@@ -1,4 +1,13 @@
-import firestore from '@react-native-firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  where,
+  orderBy,
+  getDocs,
+  serverTimestamp,
+} from '@react-native-firebase/firestore';
 import { MoodEntry } from '../types/mood';
 
 const MOODS_COLLECTION = 'moods';
@@ -7,24 +16,25 @@ export async function saveMood(
   userId: string,
   mood: Omit<MoodEntry, 'id'>
 ): Promise<string> {
-  const docRef = await firestore()
-    .collection(MOODS_COLLECTION)
-    .add({
-      ...mood,
-      userId,
-      createdAt: firestore.FieldValue.serverTimestamp(),
-    });
+  const db = getFirestore();
+  const docRef = await addDoc(collection(db, MOODS_COLLECTION), {
+    ...mood,
+    userId,
+    createdAt: serverTimestamp(),
+  });
   return docRef.id;
 }
 
 export async function getUserMoods(userId: string): Promise<MoodEntry[]> {
-  const snapshot = await firestore()
-    .collection(MOODS_COLLECTION)
-    .where('userId', '==', userId)
-    .orderBy('timestamp', 'desc')
-    .get();
+  const db = getFirestore();
+  const q = query(
+    collection(db, MOODS_COLLECTION),
+    where('userId', '==', userId),
+    orderBy('timestamp', 'desc')
+  );
+  const snapshot = await getDocs(q);
 
-  return snapshot.docs.map((doc) => ({
+  return snapshot.docs.map((doc: { id: string; data: () => Record<string, unknown> }) => ({
     id: doc.id,
     ...doc.data(),
   })) as MoodEntry[];
