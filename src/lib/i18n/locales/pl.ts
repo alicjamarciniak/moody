@@ -23,6 +23,7 @@ export default {
     summaryTitle: 'Ostatnio czujesz się',
     summaryPositive: 'Świetnie sobie radzisz.',
     summaryEncouraging: 'Lepsze dni nadejdą.',
+    seeMore: 'Zobacz więcej',
   },
   moodEntry: {
     title: 'Jak się czujesz?',

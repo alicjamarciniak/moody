@@ -44,7 +44,7 @@ export default function HomeScreen() {
       </View>
 
       <View className="flex-1">
-        <MoodList moods={moods} isLoading={isLoading} />
+        <MoodList moods={moods} isLoading={isLoading} limit={5} />
       </View>
 
       {/* Theme Toggle */}

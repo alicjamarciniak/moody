@@ -23,6 +23,7 @@ export default {
     summaryTitle: 'Lately it’s been',
     summaryPositive: "You're doing great.",
     summaryEncouraging: 'Better days are ahead.',
+    seeMore: 'See more',
   },
   moodEntry: {
     title: 'How are you feeling?',

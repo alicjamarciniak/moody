@@ -1,19 +1,26 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { t } from 'i18next';
 import React from 'react';
-import { View, ActivityIndicator, ScrollView } from 'react-native';
+import { View, ActivityIndicator, ScrollView, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { MoodCard } from './MoodCard';
 import { MoodEntry } from '@/types/mood';
 import { Text } from '@/components/Text';
 import { useTheme } from '@/context/ThemeContext';
+import { MainTabParamList } from '@/types/navigation';
 
 interface MoodListProps {
   moods: MoodEntry[];
   isLoading: boolean;
+  limit?: number;
 }
 
-const MoodList = ({ moods, isLoading }: MoodListProps) => {
+const MoodList = ({ moods, isLoading, limit }: MoodListProps) => {
   const { isDark } = useTheme();
+  const navigation = useNavigation<BottomTabNavigationProp<MainTabParamList>>();
+  const displayedMoods = limit ? moods.slice(0, limit) : moods;
+  const hasMore = limit ? moods.length > limit : false;
 
   return (
     <View className="px-5">
@@ -33,9 +40,19 @@ const MoodList = ({ moods, isLoading }: MoodListProps) => {
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ paddingVertical: 16 }}
           >
-            {moods.map((item) => (
+            {displayedMoods.map((item) => (
               <MoodCard key={item.id} mood={item} />
             ))}
+            {hasMore && (
+              <TouchableOpacity
+                onPress={() => navigation.navigate('Entries')}
+                className="items-center py-2"
+              >
+                <Text weight="medium" className="text-emerald-500">
+                  {t('home.seeMore')}
+                </Text>
+              </TouchableOpacity>
+            )}
           </ScrollView>
           {/* Top fade */}
           <LinearGradient
