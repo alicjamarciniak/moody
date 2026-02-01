@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   faFaceGrinStars,
@@ -32,10 +32,10 @@ const moodIcons: Record<string, IconProp> = {
 
 interface MoodCardProps {
   mood: MoodEntry;
-  // variant: 'sm' | 'lg';
+  onPress?: () => void;
 }
 
-export function MoodCard({ mood }: MoodCardProps) {
+export function MoodCard({ mood, onPress }: MoodCardProps) {
   const { t } = useTranslation();
   const { isDark } = useTheme();
   const date = new Date(mood.timestamp);
@@ -53,15 +53,19 @@ export function MoodCard({ mood }: MoodCardProps) {
   const textColor = isDark ? '#f3f4f6' : '#1f2937';
   // const isSmall = variant === 'sm';
 
+  const Wrapper = onPress ? TouchableOpacity : View;
+
   return (
-    <View
-      className="p-6 rounded-2xl mb-3 flex-row items-center gap-3 overflow-hidden bg-white dark:bg-gray-800"
-      style={
-        {
-          // backgroundColor: `${moodColor}`,
-        }
-      }
+    <Wrapper
+      onPress={onPress}
+      activeOpacity={0.7}
+      className="pl-9 pr-6 py-6 rounded-2xl mb-3 flex-row items-center gap-3 overflow-hidden bg-white dark:bg-gray-800"
     >
+      {/* Color strip */}
+      <View
+        className="absolute left-0 top-0 bottom-0 w-2 rounded-l-2xl"
+        style={{ backgroundColor: moodColor }}
+      />
       {/* Content */}
       <View className="flex-1 gap-1">
         <Text weight="bold" className={'text-xl'} style={{ color: textColor }}>
@@ -91,6 +95,6 @@ export function MoodCard({ mood }: MoodCardProps) {
       >
         <FontAwesomeIcon icon={icon} size={35} color={moodColor} />
       </View>
-    </View>
+    </Wrapper>
   );
 }

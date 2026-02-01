@@ -33,17 +33,17 @@ export default function HomeScreen() {
         <Timeline days={7} moods={moods} futureDays={2} todayMood={todayMood} />
       </View>
 
-      {/* Mood Summary Widget */}
-      <View className="mx-5 mb-3">
-        <MoodSummaryWidget recentMood={recentMood} />
+      {/* Mood Summary Widget + Note Widget */}
+      <View className="mx-5 mb-3 flex-row gap-3 h-36">
+        <View className="flex-[1]">
+          <NoteWidget />
+        </View>
+        <View className="flex-[2]">
+          <MoodSummaryWidget recentMood={recentMood} />
+        </View>
       </View>
 
-      {/* Note Widget */}
-      <View className="mx-5 mb-3">
-        <NoteWidget />
-      </View>
-
-      <View className="h-[300px]">
+      <View className="flex-1">
         <MoodList moods={moods} isLoading={isLoading} />
       </View>
 

@@ -35,6 +35,7 @@ module.exports = {
         },
         light: colors.light,
         dark: colors.dark,
+        bubblegum: colors.bubblegum[400],
       },
       fontFamily: {
         roboto: ['Roboto_300Light'],

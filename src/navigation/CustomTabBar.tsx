@@ -45,7 +45,7 @@ export function CustomTabBar({
         } = descriptors[route.key];
         const isFocused = state.index === index;
         const isMiddle = index === middleIndex;
-        const regularColor = isFocused ? tColors.amber[300] : tColors.gray[500];
+        const regularColor = isFocused ? colors.bubblegum : tColors.gray[500];
 
         return (
           <TouchableOpacity
@@ -59,7 +59,7 @@ export function CustomTabBar({
           >
             {/* middle "+" btn */}
             {isMiddle ? (
-              <View className="w-16 h-16 rounded-full items-center justify-center -mt-9 bg-amber-300 shadow-lg shadow-black/40 elevation-8">
+              <View className="w-16 h-16 rounded-full items-center justify-center -mt-9 bg-bubblegum shadow-lg shadow-black/40 elevation-8">
                 <FontAwesomeIcon
                   icon={faPlus as IconProp}
                   size={24}

@@ -20,9 +20,9 @@ export default {
     dark: 'ciemny',
     noMoods: 'Brak zapisanych nastrojów.\nZacznij śledzić swoje samopoczucie!',
     timeline: 'Twój tydzień',
-    summaryTitle: 'Ostatnio najczęściej czułeś/aś się {{mood}}',
-    summaryPositive: 'Tak trzymaj! Świetnie sobie radzisz.',
-    summaryEncouraging: 'Lepsze dni nadejdą. Zadbaj o siebie.',
+    summaryTitle: 'Ostatnio czujesz się',
+    summaryPositive: 'Świetnie sobie radzisz.',
+    summaryEncouraging: 'Lepsze dni nadejdą.',
   },
   moodEntry: {
     title: 'Jak się czujesz?',
@@ -60,12 +60,18 @@ export default {
   entries: {
     noEntries: 'Brak wpisów.\nZacznij śledzić nastroje i zapisywać myśli!',
   },
+  noteDetails: {
+    title: 'Notatka',
+  },
+  moodDetails: {
+    title: 'Nastrój',
+  },
   note: {
     title: 'Napisz notatkę',
     titlePlaceholder: 'Tytuł (opcjonalnie)',
     placeholder: 'Co masz na myśli?',
     save: 'Zapisz notatkę',
-    widget: 'Napisz notatkę...',
+    widget: 'Dodaj notatkę',
   },
   tabs: {
     home: 'Główna',

@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faNoteSticky } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -17,9 +17,10 @@ import { useTranslation } from 'react-i18next';
 
 interface NoteCardProps {
   note: Note;
+  onPress?: () => void;
 }
 
-export function NoteCard({ note }: NoteCardProps) {
+export function NoteCard({ note, onPress }: NoteCardProps) {
   const { t } = useTranslation();
   const { isDark } = useTheme();
   const date = new Date(note.timestamp);
@@ -34,8 +35,15 @@ export function NoteCard({ note }: NoteCardProps) {
   const textColor = isDark ? '#f3f4f6' : '#1f2937';
   const noteColor = isDark ? '#60a5fa' : '#3b82f6';
 
+  const Wrapper = onPress ? TouchableOpacity : View;
+
   return (
-    <View className="p-6 rounded-2xl mb-3 flex-row items-center gap-3 overflow-hidden bg-white dark:bg-gray-800">
+    <Wrapper onPress={onPress} activeOpacity={0.7} className="pl-9 pr-6 py-6 rounded-2xl mb-3 flex-row items-center gap-3 overflow-hidden bg-white dark:bg-gray-800">
+      {/* Color strip */}
+      <View
+        className="absolute left-0 top-0 bottom-0 w-2 rounded-l-2xl"
+        style={{ backgroundColor: noteColor }}
+      />
       <View className="flex-1 gap-1">
         <Text weight="bold" className="text-xl" style={{ color: textColor }} numberOfLines={1} ellipsizeMode="tail">
           {note.title || note.text}
@@ -63,6 +71,6 @@ export function NoteCard({ note }: NoteCardProps) {
       >
         <FontAwesomeIcon icon={faNoteSticky as IconProp} size={28} color={noteColor} />
       </View>
-    </View>
+    </Wrapper>
   );
 }

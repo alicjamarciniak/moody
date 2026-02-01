@@ -42,25 +42,35 @@ export function MoodSummaryWidget({ recentMood }: MoodSummaryWidgetProps) {
 
   return (
     <View
-      className="p-6 rounded-2xl flex-row items-center gap-3 overflow-hidden"
+      className="p-6 rounded-2xl flex-row items-center gap-3 overflow-hidden flex-1"
       style={{ backgroundColor: `${moodColor}90` }}
     >
-      <View className="flex-1 gap-1">
-        <Text weight="bold" className="text-lg" style={{ color: textColor }}>
-          {t('home.summaryTitle', { mood: t(`moods.${topMood}`) })}
-        </Text>
-        <Text className="text-sm" style={{ color: textColor }}>
+      <View className="flex gap-2 z-10">
+        <View className="gap-[0.5]">
+          <Text weight="bold" className="text-sm" style={{ color: textColor }}>
+            {t('home.summaryTitle', { mood: t(`moods.${topMood}`) })}
+          </Text>
+          <Text
+            weight="bold"
+            className="text-xl uppercase"
+            style={{ color: textColor }}
+          >
+            {t(`moods.${topMood}`)}
+          </Text>
+        </View>
+
+        <Text className="text-sm text-wrap" style={{ color: textColor }}>
           {isPositive
             ? t('home.summaryPositive')
             : t('home.summaryEncouraging')}
         </Text>
       </View>
 
-      <View className="w-20 h-12 rounded-full items-center justify-center">
+      <View className="absolute right-[-34] top-0 bottom-0 items-end justify-center">
         <FontAwesomeIcon
           icon={icon}
           size={140}
-          color={moodColor}
+          color={isDark ? `${moodColor}80` : moodColor}
           style={{ transform: [{ rotate: '-15deg' }] }}
         />
       </View>

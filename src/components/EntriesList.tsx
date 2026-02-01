@@ -2,12 +2,15 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useTranslation } from 'react-i18next';
 import React, { useMemo } from 'react';
 import { View, ActivityIndicator, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { MoodCard } from './Mood/MoodCard';
 import { NoteCard } from './NoteCard';
 import { MoodEntry } from '@/types/mood';
 import { Note } from '@/types/note';
 import { Text } from '@/components/Text';
 import { useTheme } from '@/context/ThemeContext';
+import { RootStackParamList } from '@/types/navigation';
 
 type EntryItem =
   | { type: 'mood'; data: MoodEntry }
@@ -22,6 +25,7 @@ interface EntriesListProps {
 const EntriesList = ({ moods, notes, isLoading }: EntriesListProps) => {
   const { t } = useTranslation();
   const { isDark } = useTheme();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const entries = useMemo(() => {
     const items: EntryItem[] = [
@@ -52,9 +56,17 @@ const EntriesList = ({ moods, notes, isLoading }: EntriesListProps) => {
           >
             {entries.map((item) =>
               item.type === 'mood' ? (
-                <MoodCard key={`mood-${item.data.id}`} mood={item.data} />
+                <MoodCard
+                  key={`mood-${item.data.id}`}
+                  mood={item.data}
+                  onPress={() => navigation.navigate('MoodDetails', { mood: item.data })}
+                />
               ) : (
-                <NoteCard key={`note-${item.data.id}`} note={item.data} />
+                <NoteCard
+                  key={`note-${item.data.id}`}
+                  note={item.data}
+                  onPress={() => navigation.navigate('NoteDetails', { note: item.data })}
+                />
               )
             )}
           </ScrollView>

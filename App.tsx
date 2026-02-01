@@ -16,6 +16,8 @@ import { ThemeWrapper } from './src/theme/ThemeWrapper';
 import { MainTabs } from './src/navigation/MainTabs';
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import NoteScreen from './src/screens/NoteScreen';
+import NoteDetailsScreen from './src/screens/NoteDetailsScreen';
+import MoodDetailsScreen from './src/screens/MoodDetailsScreen';
 import { RootStackParamList } from './src/types/navigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -45,6 +47,8 @@ export default function App() {
                 <Stack.Screen name="Welcome" component={WelcomeScreen} />
                 <Stack.Screen name="Main" component={MainTabs} />
                 <Stack.Screen name="Note" component={NoteScreen} />
+                <Stack.Screen name="NoteDetails" component={NoteDetailsScreen} />
+                <Stack.Screen name="MoodDetails" component={MoodDetailsScreen} />
               </Stack.Navigator>
             </NavigationContainer>
           </MoodProvider>

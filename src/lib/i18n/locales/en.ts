@@ -20,9 +20,9 @@ export default {
     dark: 'Dark',
     noMoods: 'No moods recorded yet.\nStart tracking how you feel!',
     timeline: 'Your Week',
-    summaryTitle: 'Recently you mostly felt {{mood}}',
-    summaryPositive: 'Keep it up! You\'re doing great.',
-    summaryEncouraging: 'Better days are ahead. Take care of yourself.',
+    summaryTitle: 'Lately it’s been',
+    summaryPositive: "You're doing great.",
+    summaryEncouraging: 'Better days are ahead.',
   },
   moodEntry: {
     title: 'How are you feeling?',
@@ -60,12 +60,18 @@ export default {
   entries: {
     noEntries: 'No entries yet.\nStart tracking your moods and thoughts!',
   },
+  noteDetails: {
+    title: 'Note',
+  },
+  moodDetails: {
+    title: 'Mood',
+  },
   note: {
     title: 'Write a note',
     titlePlaceholder: 'Title (optional)',
-    placeholder: 'What\'s on your mind?',
+    placeholder: "What's on your mind?",
     save: 'Save note',
-    widget: 'Write a note...',
+    widget: 'Write a note',
   },
   tabs: {
     home: 'Home',
