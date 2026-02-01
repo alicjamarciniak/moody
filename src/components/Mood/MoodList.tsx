@@ -14,6 +14,7 @@ import { MoodEntry } from '@/types/mood';
 import { Text } from '@/components/Text';
 import { useTheme } from '@/context/ThemeContext';
 import { MainTabParamList } from '@/types/navigation';
+import { colors } from '@/theme/colors';
 
 interface MoodListProps {
   moods: MoodEntry[];
@@ -28,13 +29,16 @@ const MoodList = ({ moods, isLoading, limit }: MoodListProps) => {
   const hasMore = limit ? moods.length > limit : false;
 
   return (
-    <View className="px-5">
-      <Text weight="bold" className="text-lg text-gray-600 dark:text-gray-400">
+    <View className="px-5 flex-1 static">
+      <Text
+        weight="bold"
+        className="text-lg text-gray-600 dark:text-gray-400 mb-2 static"
+      >
         {t('home.moodHistory')}
       </Text>
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#10b981" />
+          <ActivityIndicator size="large" color={colors.bubblegum[400]} />
         </View>
       ) : moods.length === 0 ? (
         <View className="flex-1 items-center justify-center">
@@ -43,10 +47,10 @@ const MoodList = ({ moods, isLoading, limit }: MoodListProps) => {
           </Text>
         </View>
       ) : (
-        <>
+        <View className="flex-1 relative">
           <ScrollView
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ paddingVertical: 16 }}
+            contentContainerStyle={{ paddingVertical: 8 }}
           >
             {displayedMoods.map((item) => (
               <MoodCard key={item.id} mood={item} variant="sm" />
@@ -56,7 +60,7 @@ const MoodList = ({ moods, isLoading, limit }: MoodListProps) => {
                 onPress={() => navigation.navigate('Entries')}
                 className="items-center py-2"
               >
-                <Text weight="medium" className="text-emerald-500">
+                <Text weight="medium" className="text-bubblegum">
                   {t('home.seeMore')}
                 </Text>
               </TouchableOpacity>
@@ -78,7 +82,7 @@ const MoodList = ({ moods, isLoading, limit }: MoodListProps) => {
             className="absolute bottom-0 left-0 right-0 h-6 z-10"
             pointerEvents="none"
           />
-        </>
+        </View>
       )}
     </View>
   );
