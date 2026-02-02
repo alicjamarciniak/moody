@@ -22,6 +22,7 @@ import NoteScreen from './src/screens/NoteScreen';
 import NoteDetailsScreen from './src/screens/NoteDetailsScreen';
 import MoodDetailsScreen from './src/screens/MoodDetailsScreen';
 import OversightScreen from './src/screens/OversightScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
 import { RootStackParamList } from './src/types/navigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -57,6 +58,7 @@ function RootNavigator() {
             <Stack.Screen name="NoteDetails" component={NoteDetailsScreen} />
             <Stack.Screen name="MoodDetails" component={MoodDetailsScreen} />
             <Stack.Screen name="Oversight" component={OversightScreen} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
           </>
         )}
       </Stack.Navigator>

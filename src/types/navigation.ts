@@ -10,6 +10,7 @@ export type RootStackParamList = {
   NoteDetails: { note: Note };
   MoodDetails: { mood: MoodEntry };
   Oversight: undefined;
+  Profile: undefined;
 };
 
 export type MainTabParamList = {

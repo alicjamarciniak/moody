@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import {
   configureGoogleSignIn,
@@ -8,14 +8,18 @@ import {
   firebaseSignOut,
   onAuthStateChanged,
 } from '../services/authService';
+import { getUserProfile } from '../services/userService';
+import { UserProfile } from '../types/user';
 
 interface AuthContextType {
   user: FirebaseAuthTypes.User | null;
+  userProfile: UserProfile | null;
   isLoading: boolean;
-  signUp: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string) => Promise<FirebaseAuthTypes.UserCredential>;
   signIn: (email: string, password: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   signOut: () => Promise<void>;
+  refreshUserProfile: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -26,7 +30,17 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const refreshUserProfile = useCallback(async () => {
+    if (!user) {
+      setUserProfile(null);
+      return;
+    }
+    const profile = await getUserProfile(user.uid);
+    setUserProfile(profile);
+  }, [user]);
 
   useEffect(() => {
     configureGoogleSignIn();
@@ -37,8 +51,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
     return unsubscribe;
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      refreshUserProfile();
+    } else {
+      setUserProfile(null);
+    }
+  }, [user, refreshUserProfile]);
+
   const signUp = async (email: string, password: string) => {
-    await authSignUp(email, password);
+    return authSignUp(email, password);
   };
 
   const signIn = async (email: string, password: string) => {
@@ -55,7 +77,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   return (
     <AuthContext.Provider
-      value={{ user, isLoading, signUp, signIn, signInWithGoogle, signOut }}
+      value={{ user, userProfile, isLoading, signUp, signIn, signInWithGoogle, signOut, refreshUserProfile }}
     >
       {children}
     </AuthContext.Provider>

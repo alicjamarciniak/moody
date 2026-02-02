@@ -103,6 +103,9 @@ export default {
     signup: 'Sign Up',
     email: 'Email',
     password: 'Password',
+    confirmPassword: 'Confirm Password',
+    passwordsMismatch: 'Passwords do not match.',
+    invalidEmail: 'Please enter a valid email address.',
     googleSignIn: 'Continue with Google',
     noAccount: "Don't have an account?",
     hasAccount: 'Already have an account?',
@@ -110,6 +113,11 @@ export default {
     signUpFailed: 'Sign up failed. Please try again.',
     googleSignInFailed: 'Google sign in failed. Please try again.',
     signOut: 'Sign Out',
+    chooseAvatar: 'Choose your avatar',
+    displayName: 'Display Name',
+  },
+  profile: {
+    title: 'Profile',
   },
   settings: {
     title: 'Settings',

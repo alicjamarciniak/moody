@@ -6,10 +6,13 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { useTranslation } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Text } from './Text';
 import { Button } from './Button';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useAuth } from '../context/AuthContext';
+import { RootStackParamList } from '../types/navigation';
 
 const DRAWER_WIDTH = Dimensions.get('window').width * 0.75;
 
@@ -21,6 +24,7 @@ interface SettingsDrawerProps {
 export function SettingsDrawer({ visible, onClose }: SettingsDrawerProps) {
   const { t } = useTranslation();
   const { signOut } = useAuth();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const translateX = useSharedValue(DRAWER_WIDTH);
 
   useEffect(() => {
@@ -54,9 +58,19 @@ export function SettingsDrawer({ visible, onClose }: SettingsDrawerProps) {
               {t('settings.title')}
             </Text>
 
+            <Button
+              variant="outlined"
+              size="md"
+              text={t('profile.title')}
+              onPress={() => {
+                onClose();
+                navigation.navigate('Profile');
+              }}
+            />
+
             <Text
               weight="medium"
-              className="text-sm text-gray-600 dark:text-gray-400 mb-3"
+              className="text-sm text-gray-600 dark:text-gray-400 mb-3 mt-6"
             >
               {t('settings.language')}
             </Text>

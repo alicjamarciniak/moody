@@ -103,6 +103,9 @@ export default {
     signup: 'Zarejestruj się',
     email: 'Email',
     password: 'Hasło',
+    confirmPassword: 'Potwierdź hasło',
+    passwordsMismatch: 'Hasła nie są takie same.',
+    invalidEmail: 'Podaj prawidłowy adres email.',
     googleSignIn: 'Kontynuuj z Google',
     noAccount: 'Nie masz konta?',
     hasAccount: 'Masz już konto?',
@@ -110,6 +113,11 @@ export default {
     signUpFailed: 'Rejestracja nie powiodła się. Spróbuj ponownie.',
     googleSignInFailed: 'Logowanie przez Google nie powiodło się. Spróbuj ponownie.',
     signOut: 'Wyloguj się',
+    chooseAvatar: 'Wybierz swojego awatara',
+    displayName: 'Nazwa wyświetlana',
+  },
+  profile: {
+    title: 'Profil',
   },
   settings: {
     title: 'Ustawienia',
