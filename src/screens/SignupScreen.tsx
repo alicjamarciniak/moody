@@ -22,7 +22,6 @@ import { RootStackParamList } from '../types/navigation';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { colors } from '@/theme/colors';
 import { AVATARS, AVATAR_IMAGES, AvatarKey } from '../types/user';
-import { createUserProfile } from '../services/userService';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -70,8 +69,7 @@ export default function SignupScreen({ navigation }: SignupScreenProps) {
     if (password !== confirmPassword) return;
     setIsSubmitting(true);
     try {
-      const credential = await signUp(email.trim(), password);
-      await createUserProfile(credential.user.uid, {
+      await signUp(email.trim(), password, {
         avatar: selectedAvatar,
         displayName: displayName.trim(),
       });

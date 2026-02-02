@@ -8,14 +8,14 @@ import {
   firebaseSignOut,
   onAuthStateChanged,
 } from '../services/authService';
-import { getUserProfile } from '../services/userService';
-import { UserProfile } from '../types/user';
+import { getUserProfile, createUserProfile } from '../services/userService';
+import { UserProfile, AvatarKey } from '../types/user';
 
 interface AuthContextType {
   user: FirebaseAuthTypes.User | null;
   userProfile: UserProfile | null;
   isLoading: boolean;
-  signUp: (email: string, password: string) => Promise<FirebaseAuthTypes.UserCredential>;
+  signUp: (email: string, password: string, profileData?: { avatar: AvatarKey; displayName: string }) => Promise<FirebaseAuthTypes.UserCredential>;
   signIn: (email: string, password: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   signOut: () => Promise<void>;
@@ -59,8 +59,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }, [user, refreshUserProfile]);
 
-  const signUp = async (email: string, password: string) => {
-    return authSignUp(email, password);
+  const signUp = async (email: string, password: string, profileData?: { avatar: AvatarKey; displayName: string }) => {
+    const credential = await authSignUp(email, password);
+    if (profileData) {
+      await createUserProfile(credential.user.uid, profileData);
+    }
+    return credential;
   };
 
   const signIn = async (email: string, password: string) => {

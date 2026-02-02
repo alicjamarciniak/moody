@@ -1,5 +1,16 @@
-import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithCredential,
+  signOut,
+  onAuthStateChanged as firebaseOnAuthStateChanged,
+  GoogleAuthProvider,
+  FirebaseAuthTypes,
+} from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+
+export type { FirebaseAuthTypes };
 
 export function configureGoogleSignIn() {
   GoogleSignin.configure({
@@ -12,14 +23,14 @@ export async function signUp(
   email: string,
   password: string
 ): Promise<FirebaseAuthTypes.UserCredential> {
-  return auth().createUserWithEmailAndPassword(email, password);
+  return createUserWithEmailAndPassword(getAuth(), email, password);
 }
 
 export async function signIn(
   email: string,
   password: string
 ): Promise<FirebaseAuthTypes.UserCredential> {
-  return auth().signInWithEmailAndPassword(email, password);
+  return signInWithEmailAndPassword(getAuth(), email, password);
 }
 
 export async function signInWithGoogle(): Promise<FirebaseAuthTypes.UserCredential> {
@@ -29,16 +40,16 @@ export async function signInWithGoogle(): Promise<FirebaseAuthTypes.UserCredenti
   if (!idToken) {
     throw new Error('Google Sign-In failed: no idToken returned');
   }
-  const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-  return auth().signInWithCredential(googleCredential);
+  const googleCredential = GoogleAuthProvider.credential(idToken);
+  return signInWithCredential(getAuth(), googleCredential);
 }
 
 export async function firebaseSignOut(): Promise<void> {
-  await auth().signOut();
+  await signOut(getAuth());
 }
 
 export function onAuthStateChanged(
   callback: (user: FirebaseAuthTypes.User | null) => void
 ): () => void {
-  return auth().onAuthStateChanged(callback);
+  return firebaseOnAuthStateChanged(getAuth(), callback);
 }
