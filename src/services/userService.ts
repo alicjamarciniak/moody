@@ -3,7 +3,6 @@ import {
   doc,
   setDoc,
   getDoc,
-  updateDoc,
   serverTimestamp,
 } from '@react-native-firebase/firestore';
 import { AvatarKey, UserProfile } from '../types/user';
@@ -27,10 +26,10 @@ export async function updateUserProfile(
   data: { avatar: AvatarKey; displayName: string }
 ): Promise<void> {
   const db = getFirestore();
-  await updateDoc(doc(db, USERS_COLLECTION, userId), {
+  await setDoc(doc(db, USERS_COLLECTION, userId), {
     avatar: data.avatar,
     displayName: data.displayName,
-  });
+  }, { merge: true });
 }
 
 export async function getUserProfile(

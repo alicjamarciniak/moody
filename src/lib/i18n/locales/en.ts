@@ -16,6 +16,7 @@ export default {
   },
   home: {
     title: 'Home',
+    hello: 'Hello',
     subtitle: 'Track your mood today',
     switchTheme: 'Switch to {{mode}} Mode',
     light: 'Light',

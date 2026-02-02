@@ -16,6 +16,7 @@ export default {
   },
   home: {
     title: 'Strona główna',
+    hello: 'Cześć',
     subtitle: 'Śledź swój nastrój dzisiaj',
     switchTheme: 'Przełącz na tryb {{mode}}',
     light: 'jasny',

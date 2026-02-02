@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Modal, Pressable, Dimensions, View } from 'react-native';
+import { Modal, Pressable, Dimensions, View, TouchableOpacity } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -58,15 +58,17 @@ export function SettingsDrawer({ visible, onClose }: SettingsDrawerProps) {
               {t('settings.title')}
             </Text>
 
-            <Button
-              variant="outlined"
-              size="md"
-              text={t('profile.title')}
+            <TouchableOpacity
               onPress={() => {
                 onClose();
                 navigation.navigate('Profile');
               }}
-            />
+              className="py-3 border-b border-gray-200 dark:border-gray-700"
+            >
+              <Text className="text-base text-gray-800 dark:text-gray-100">
+                {t('profile.title')}
+              </Text>
+            </TouchableOpacity>
 
             <Text
               weight="medium"
