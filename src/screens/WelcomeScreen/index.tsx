@@ -10,6 +10,7 @@ import { Button } from '../../components/Button';
 import { MOOD_KEYS, MoodOption, MOODS } from '../../types/mood';
 import { RootStackParamList } from '../../types/navigation';
 import { LanguageSwitcher } from '../../components/LanguageSwitcher';
+import { MoodAnimation } from '../../components/MoodAnimation';
 import { useBackgroundColorAnimation } from '../../hooks/useBackgroundColorAnimation';
 import { darkTheme, lightTheme } from '@/theme/theme';
 import { saveMood } from '../../services/moodService';
@@ -85,15 +86,16 @@ export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
       >
         <StatusBar style="light" />
 
-        {/* Language Switcher - at this moment language should be set based on phone settings
-        <View className="absolute top-4 right-4 z-10">
-          <LanguageSwitcher />
-        </View> */}
-
         <View className="flex-1 items-center justify-center px-4">
-          <Text className="text-xl text-dark dark:text-light mb-10 text-center">
+          <Text className="text-xl text-dark dark:text-light mb-6 text-center">
             {t('welcome.title')}
           </Text>
+
+          {selectedMood !== null && (
+            <View style={{ height: 150, overflow: 'hidden', marginBottom: 50 }}>
+              <MoodAnimation mood={MOOD_KEYS[selectedMood]} size={300} />
+            </View>
+          )}
 
           <View className="w-full gap-2 flex-row flex-wrap justify-center">
             {MOODS.map((_, i) => i)
