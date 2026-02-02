@@ -7,7 +7,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useTranslation } from 'react-i18next';
 import { Text } from './Text';
+import { Button } from './Button';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { useAuth } from '../context/AuthContext';
 
 const DRAWER_WIDTH = Dimensions.get('window').width * 0.75;
 
@@ -18,6 +20,7 @@ interface SettingsDrawerProps {
 
 export function SettingsDrawer({ visible, onClose }: SettingsDrawerProps) {
   const { t } = useTranslation();
+  const { signOut } = useAuth();
   const translateX = useSharedValue(DRAWER_WIDTH);
 
   useEffect(() => {
@@ -58,6 +61,15 @@ export function SettingsDrawer({ visible, onClose }: SettingsDrawerProps) {
               {t('settings.language')}
             </Text>
             <LanguageSwitcher />
+
+            <View className="mt-8">
+              <Button
+                variant="outlined"
+                size="md"
+                text={t('auth.signOut')}
+                onPress={signOut}
+              />
+            </View>
           </Pressable>
         </Animated.View>
       </Pressable>

@@ -13,6 +13,7 @@ import { LanguageSwitcher } from '../../components/LanguageSwitcher';
 import { useBackgroundColorAnimation } from '../../hooks/useBackgroundColorAnimation';
 import { darkTheme, lightTheme } from '@/theme/theme';
 import { saveMood } from '../../services/moodService';
+import { useAuth } from '../../context/AuthContext';
 import MoodPill from './MoodPill';
 
 const colorMap: Record<string, { light: string; dark: string }> =
@@ -29,6 +30,7 @@ type WelcomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Welcome'>;
 export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
+  const { user } = useAuth();
   const [selectedMood, setSelectedMood] = useState<number | null>(2);
   const [bgColor, setBgColor] = useState<string>('okay');
   const [isSaving, setIsSaving] = useState(false);
@@ -44,7 +46,7 @@ export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
     setIsSaving(true);
     try {
       const mood = MOODS[selectedMood];
-      await saveMood('temp-user-id', {
+      await saveMood(user!.uid, {
         value: mood.value,
         label: mood.label,
         date: new Date().toISOString().split('T')[0],

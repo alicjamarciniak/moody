@@ -9,11 +9,13 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Text } from '../components/Text';
 import { Button } from '../components/Button';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 import { saveNote } from '../services/noteService';
 
 export default function NoteScreen() {
   const { t } = useTranslation();
   const { isDark } = useTheme();
+  const { user } = useAuth();
   const navigation = useNavigation();
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
@@ -27,7 +29,7 @@ export default function NoteScreen() {
     try {
       const now = new Date();
       const trimmedTitle = title.trim();
-      await saveNote('temp-user-id', {
+      await saveNote(user!.uid, {
         ...(trimmedTitle ? { title: trimmedTitle } : {}),
         text: trimmed,
         date: now.toISOString().split('T')[0],

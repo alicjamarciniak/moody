@@ -2,6 +2,7 @@ import { useState, useCallback, useMemo } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { getUserMoods } from '../services/moodService';
 import { MoodEntry } from '../types/mood';
+import { useAuth } from '../context/AuthContext';
 
 /**
  * Returns the most frequent mood label from an array of entries.
@@ -43,7 +44,9 @@ function toDateKey(date: Date): string {
   return date.toISOString().split('T')[0];
 }
 
-export function useMoods(userId: string = 'temp-user-id') {
+export function useMoods() {
+  const { user } = useAuth();
+  const userId = user!.uid;
   const [moods, setMoods] = useState<MoodEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 

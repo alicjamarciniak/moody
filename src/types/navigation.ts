@@ -2,6 +2,8 @@ import { MoodEntry } from './mood';
 import { Note } from './note';
 
 export type RootStackParamList = {
+  Login: undefined;
+  Signup: undefined;
   Welcome: undefined;
   Main: undefined;
   Note: undefined;

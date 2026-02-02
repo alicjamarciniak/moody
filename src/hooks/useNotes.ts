@@ -2,8 +2,11 @@ import { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { getUserNotes } from '../services/noteService';
 import { Note } from '../types/note';
+import { useAuth } from '../context/AuthContext';
 
-export function useNotes(userId: string = 'temp-user-id') {
+export function useNotes() {
+  const { user } = useAuth();
+  const userId = user!.uid;
   const [notes, setNotes] = useState<Note[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
