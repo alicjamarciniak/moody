@@ -12,7 +12,7 @@ export default {
     inProgressSubtitle: 'Ta sekcja jest jeszcze w budowie.',
   },
   welcome: {
-    title: 'Jak się dzisiaj czujesz?',
+    title: 'Jak się teraz czujesz?',
   },
   home: {
     title: 'Strona główna',
@@ -24,11 +24,12 @@ export default {
     noMoods: 'Brak zapisanych nastrojów.\nZacznij śledzić swoje samopoczucie!',
     timeline: 'Twój tydzień',
     summaryTitle: 'Ostatnio czujesz się',
-    summaryPositive: 'Świetnie sobie radzisz.',
-    summaryEncouraging: 'Lepsze dni nadejdą.',
+    summaryPositive: 'Świetnie sobie radzisz!',
+    summaryEncouraging: 'Lepsze dni nadejdą',
     seeMore: 'Zobacz więcej',
     moodHistory: 'Historia nastrojów',
     moodCount: 'Liczba nastrojów',
+    noMoodYet: 'Brak nastroju?',
   },
   moodEntry: {
     title: 'Jak się czujesz?',
@@ -112,7 +113,8 @@ export default {
     hasAccount: 'Masz już konto?',
     signInFailed: 'Logowanie nie powiodło się. Sprawdź dane logowania.',
     signUpFailed: 'Rejestracja nie powiodła się. Spróbuj ponownie.',
-    googleSignInFailed: 'Logowanie przez Google nie powiodło się. Spróbuj ponownie.',
+    googleSignInFailed:
+      'Logowanie przez Google nie powiodło się. Spróbuj ponownie.',
     signOut: 'Wyloguj się',
     chooseAvatar: 'Wybierz swojego awatara',
     displayName: 'Nazwa wyświetlana',

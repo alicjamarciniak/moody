@@ -6,6 +6,7 @@ import {
   faFaceMeh,
   faFaceFrown,
   faFaceSadTear,
+  faCircleQuestion,
 } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTranslation } from 'react-i18next';
@@ -31,7 +32,36 @@ export function MoodSummaryWidget({ recentMood }: MoodSummaryWidgetProps) {
   const { t } = useTranslation();
   const { isDark } = useTheme();
 
-  if (!recentMood) return null;
+  if (!recentMood) {
+    const grayColor = isDark ? '#374151' : '#d1d5db';
+    const grayText = isDark ? '#9ca3af' : '#6b7280';
+
+    return (
+      <View
+        className="p-6 rounded-2xl flex-row items-center gap-3 overflow-hidden flex-1"
+        style={{ backgroundColor: isDark ? '#1f2937' : '#e5e7eb' }}
+      >
+        <View className="flex gap-2 z-10">
+          <Text weight="bold" className="text-sm" style={{ color: grayText }}>
+            {t('home.summaryTitle', { mood: '' })}
+          </Text>
+          <Text weight="bold" className="text-lg" style={{ color: grayText }}>
+            {t('home.noMoodYet')}
+          </Text>
+        </View>
+
+        <View className="absolute right-[-34] top-0 bottom-0 items-end justify-center">
+          <FontAwesomeIcon
+            icon={faCircleQuestion as IconProp}
+            size={140}
+            color={grayColor}
+            style={{ transform: [{ rotate: '-15deg' }] }}
+          />
+        </View>
+      </View>
+    );
+  }
+
   const topMood = recentMood;
 
   const theme = lightTheme;

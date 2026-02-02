@@ -12,7 +12,7 @@ export default {
     inProgressSubtitle: 'This section is still being developed.',
   },
   welcome: {
-    title: 'How are you feeling today?',
+    title: 'How are you feeling now?',
   },
   home: {
     title: 'Home',
@@ -24,11 +24,12 @@ export default {
     noMoods: 'No moods recorded yet.\nStart tracking how you feel!',
     timeline: 'Your Week',
     summaryTitle: 'Lately it’s been',
-    summaryPositive: "You're doing great.",
-    summaryEncouraging: 'Better days are ahead.',
+    summaryPositive: "You're doing great!",
+    summaryEncouraging: 'Better days are ahead',
     seeMore: 'See more',
     moodHistory: 'Mood history',
     moodCount: 'Mood Count',
+    noMoodYet: 'No mood yet?',
   },
   moodEntry: {
     title: 'How are you feeling?',

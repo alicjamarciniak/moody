@@ -35,7 +35,7 @@ export const lightTheme = {
 export const darkTheme = {
   bg: colors.charcoalBlue[900],
   primary: colors.charcoalBlue[500],
-  awesome: colors.amber[700],
+  awesome: colors.amber[600],
   good: colors.emerald[800],
   okay: colors.greenGray[700],
   bad: colors.pacific[800],
