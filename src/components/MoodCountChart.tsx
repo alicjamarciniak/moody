@@ -1,28 +1,14 @@
 import { View } from 'react-native';
 import { PieChart } from 'react-native-gifted-charts';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import {
-  faFaceGrinStars,
-  faFaceSmile,
-  faFaceMeh,
-  faFaceFrown,
-  faFaceSadTear,
-} from '@fortawesome/free-solid-svg-icons';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTranslation } from 'react-i18next';
 import { Text } from './Text';
 import { MoodEntry } from '../types/mood';
 import { useTheme } from '../context/ThemeContext';
 import { lightTheme, MoodKey } from '../theme/theme';
+import { default as tColors } from 'tailwindcss/colors';
 import { colors } from '@/theme/colors';
-
-const moodIcons: Record<string, IconProp> = {
-  awesome: faFaceGrinStars as IconProp,
-  good: faFaceSmile as IconProp,
-  okay: faFaceMeh as IconProp,
-  bad: faFaceFrown as IconProp,
-  awful: faFaceSadTear as IconProp,
-};
+import { moodIcons } from '@/constants/moodIcons';
 
 const moodOrder: MoodKey[] = ['awesome', 'good', 'okay', 'bad', 'awful'];
 
@@ -53,46 +39,6 @@ export function MoodCountChart({ moods, year, month }: MoodCountChartProps) {
   );
 
   const totalMoods = filteredMoods.length;
-
-  // Calculate statistics
-  // 1. Top mood
-  const topMood = moodOrder.reduce((top, key) => {
-    if (!moodCounts[key]) return top;
-    if (!top || moodCounts[key] > moodCounts[top]) return key;
-    return top;
-  }, '' as MoodKey);
-
-  // 2. Top daytime (morning, afternoon, evening, night)
-  const daytimeCounts = filteredMoods.reduce((acc, mood) => {
-    const hour = new Date(mood.timestamp).getHours();
-    let period: string;
-    if (hour >= 5 && hour < 12) period = 'morning';
-    else if (hour >= 12 && hour < 17) period = 'afternoon';
-    else if (hour >= 17 && hour < 21) period = 'evening';
-    else period = 'night';
-    acc[period] = (acc[period] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
-
-  const topDaytime = Object.entries(daytimeCounts).reduce(
-    (top, [period, count]) => {
-      if (!top[0] || count > top[1]) return [period, count];
-      return top;
-    },
-    ['', 0] as [string, number]
-  )[0];
-
-  // 3. Mood streak (consecutive days with moods)
-  const daysWithMoods = new Set(
-    filteredMoods.map((mood) => {
-      const date = new Date(mood.timestamp);
-      return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-    })
-  );
-  const moodStreak = daysWithMoods.size;
-
-  // 4. Average moods per day
-  const avgMoodsPerDay = moodStreak > 0 ? (totalMoods / moodStreak).toFixed(1) : '0';
 
   // Prepare data for pie chart
   const pieData = moodOrder
@@ -131,7 +77,7 @@ export function MoodCountChart({ moods, year, month }: MoodCountChartProps) {
               donut
               radius={56}
               innerRadius={40}
-              innerCircleColor={isDark ? colors.darkGray : '#ffffff'}
+              innerCircleColor={isDark ? colors.darkGray : tColors.white}
               centerLabelComponent={() => (
                 <View className="items-center justify-center">
                   <Text

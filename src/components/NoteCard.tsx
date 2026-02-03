@@ -6,6 +6,7 @@ import { Text } from './Text';
 import { Note } from '../types/note';
 import { useTheme } from '../context/ThemeContext';
 import { colors } from '@/theme/colors';
+import { default as tColors } from 'tailwindcss/colors';
 import {
   gateDateStr,
   getDayTimeIcon,
@@ -33,20 +34,26 @@ export function NoteCard({ note, onPress }: NoteCardProps) {
   const yesterday = isYesterday(date);
   const dateStr = today ? '' : yesterday ? 'Yesterday' : gateDateStr(date);
 
-  const noteColor = isDark ? '#60a5fa' : '#3b82f6';
+  const noteColor = isDark ? tColors.blue[400] : tColors.blue[600];
   const iconTextColor = isDark ? colors.dirtyWhite : colors.darkGray;
 
   const Wrapper = onPress ? TouchableOpacity : View;
 
   return (
-    <Wrapper onPress={onPress} activeOpacity={0.7} className="pl-9 pr-6 py-6 rounded-2xl mb-3 flex-row items-center gap-3 overflow-hidden bg-white dark:bg-gray-800">
+    <Wrapper
+      onPress={onPress}
+      activeOpacity={0.7}
+      className="pl-9 pr-6 py-6 rounded-2xl mb-3 flex-row items-center gap-3 overflow-hidden bg-white dark:bg-gray-800"
+    >
       {/* Color strip */}
-      <View
-        className="absolute left-0 top-0 bottom-0 w-2 rounded-l-2xl"
-        style={{ backgroundColor: noteColor }}
-      />
+      <View className="absolute left-0 top-0 bottom-0 w-2 rounded-l-2xl bg-blue-600 dark:bg-blue-400" />
       <View className="flex-1 gap-1">
-        <Text weight="bold" className="text-xl text-darkGray dark:text-dirtyWhite" numberOfLines={1} ellipsizeMode="tail">
+        <Text
+          weight="bold"
+          className="text-xl text-darkGray dark:text-dirtyWhite"
+          numberOfLines={1}
+          ellipsizeMode="tail"
+        >
           {note.title || note.text}
         </Text>
 
@@ -70,7 +77,11 @@ export function NoteCard({ note, onPress }: NoteCardProps) {
         className="w-16 h-16 rounded-full items-center justify-center"
         style={{ backgroundColor: noteColor + '4D' }}
       >
-        <FontAwesomeIcon icon={faNoteSticky as IconProp} size={28} color={noteColor} />
+        <FontAwesomeIcon
+          icon={faNoteSticky as IconProp}
+          size={28}
+          color={noteColor}
+        />
       </View>
     </Wrapper>
   );

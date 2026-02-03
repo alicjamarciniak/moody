@@ -16,14 +16,11 @@ export function NoteWidget() {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('Note')}
-      className="p-6 rounded-2xl bg-blue-300 dark:bg-blue-400 flex-col items-center justify-center gap-3 flex-1"
+      className="p-6 rounded-2xl bg-blue-300 dark:bg-blue-500/80 flex-col items-center justify-center gap-3 flex-1"
       activeOpacity={0.7}
     >
       <FontAwesomeIcon icon={faPlus as IconProp} size={30} color={'white'} />
-      <Text
-        weight="bold"
-        className="text-sm text-center text-white"
-      >
+      <Text weight="bold" className="text-sm text-center text-white">
         {t('note.widget')}
       </Text>
     </TouchableOpacity>

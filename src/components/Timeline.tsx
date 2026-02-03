@@ -1,36 +1,31 @@
-import { View, ScrollView } from 'react-native';
+import { View } from 'react-native';
 import { Text } from './Text';
 import { useTheme } from '../context/ThemeContext';
 import { lightTheme, darkTheme, MoodKey } from '../theme/theme';
 import { MoodEntry } from '../types/mood';
 import { getMostFrequentMood } from '../hooks/useMoods';
 import { colors } from '@/theme/colors';
+import { copyDate, getToday, toDateKey } from '@/helpers/date';
 
 const WEEKDAY_LETTERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
-function toDateKey(date: Date): string {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
-}
-
 interface TimelineProps {
-  /** Total number of day circles to show */
   days: number;
-  /** Mood entries to map onto the timeline */
   moods: MoodEntry[];
-  /** How many future (greyed-out) days to show at the end */
   futureDays?: number;
-  /** Most frequent mood label for today (from useMoods hook) */
   todayMood?: string | null;
 }
 
-export function Timeline({ days, moods, futureDays = 2, todayMood }: TimelineProps) {
+export function Timeline({
+  days,
+  moods,
+  futureDays = 2,
+  todayMood,
+}: TimelineProps) {
   const { isDark } = useTheme();
   const theme = isDark ? darkTheme : lightTheme;
 
-  const today = new Date();
+  const today = getToday();
   today.setHours(0, 0, 0, 0);
 
   // Group moods by date key
@@ -46,13 +41,13 @@ export function Timeline({ days, moods, futureDays = 2, todayMood }: TimelinePro
   const items: { date: Date; isFuture: boolean }[] = [];
 
   for (let i = pastDays - 1; i >= 0; i--) {
-    const d = new Date(today);
+    const d = copyDate(today);
     d.setDate(d.getDate() - i);
     items.push({ date: d, isFuture: false });
   }
 
   for (let i = 1; i <= futureDays; i++) {
-    const d = new Date(today);
+    const d = copyDate(today);
     d.setDate(d.getDate() + i);
     items.push({ date: d, isFuture: true });
   }
@@ -61,11 +56,7 @@ export function Timeline({ days, moods, futureDays = 2, todayMood }: TimelinePro
   const todayBorderColor = isDark ? colors.dirtyWhite : colors.darkGray;
 
   return (
-    <ScrollView
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{ paddingHorizontal: 4, gap: 8, alignItems: 'flex-end' }}
-    >
+    <View className="flex flex-row gap-5 justify-center px-8">
       {items.map((item) => {
         const dateKey = toDateKey(item.date);
         const dayOfMonth = item.date.getDate();
@@ -73,11 +64,14 @@ export function Timeline({ days, moods, futureDays = 2, todayMood }: TimelinePro
         const isToday = dateKey === toDateKey(today);
 
         const entriesForDay = moodsByDate[dateKey];
-        const hasMood = !item.isFuture && entriesForDay && entriesForDay.length > 0;
+        const hasMood =
+          !item.isFuture && entriesForDay && entriesForDay.length > 0;
         const moodLabel = hasMood ? getMostFrequentMood(entriesForDay) : null;
-        const todayMoodColor = todayMood ? theme[todayMood as MoodKey] ?? theme.okay : null;
+        const todayMoodColor = todayMood
+          ? (theme[todayMood as MoodKey] ?? theme.okay)
+          : null;
         const circleColor = moodLabel
-          ? theme[moodLabel as MoodKey] ?? theme.okay
+          ? (theme[moodLabel as MoodKey] ?? theme.okay)
           : isToday && todayMoodColor
             ? todayMoodColor
             : greyColor;
@@ -97,7 +91,7 @@ export function Timeline({ days, moods, futureDays = 2, todayMood }: TimelinePro
 
             {/* Circle */}
             <View
-              className="w-9 h-9 rounded-full items-center justify-center"
+              className="w-10 h-10 rounded-full items-center justify-center"
               style={{
                 backgroundColor: circleColor,
                 borderWidth: isToday ? 2 : 0,
@@ -106,7 +100,7 @@ export function Timeline({ days, moods, futureDays = 2, todayMood }: TimelinePro
               }}
             >
               <Text
-                weight="medium"
+                weight="bold"
                 className={`text-xs ${
                   item.isFuture
                     ? 'text-lightGray dark:text-midGray'
@@ -121,6 +115,6 @@ export function Timeline({ days, moods, futureDays = 2, todayMood }: TimelinePro
           </View>
         );
       })}
-    </ScrollView>
+    </View>
   );
 }

@@ -1,13 +1,5 @@
 import { View, TouchableOpacity } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import {
-  faFaceGrinStars,
-  faFaceSmile,
-  faFaceMeh,
-  faFaceFrown,
-  faFaceSadTear,
-} from '@fortawesome/free-solid-svg-icons';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTranslation } from 'react-i18next';
 import { Text } from '../Text';
 import { MoodEntry } from '@/types/mood';
@@ -22,14 +14,7 @@ import {
   isYesterday,
 } from '@/helpers/date';
 import { colors } from '@/theme/colors';
-
-const moodIcons: Record<string, IconProp> = {
-  awesome: faFaceGrinStars as IconProp,
-  good: faFaceSmile as IconProp,
-  okay: faFaceMeh as IconProp,
-  bad: faFaceFrown as IconProp,
-  awful: faFaceSadTear as IconProp,
-};
+import { moodIcons } from '@/constants/moodIcons';
 
 interface MoodCardProps {
   mood: MoodEntry;

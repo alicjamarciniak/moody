@@ -4,14 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useTranslation } from 'react-i18next';
 import { useRoute, useNavigation, RouteProp } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import {
-  faArrowLeft,
-  faFaceGrinStars,
-  faFaceSmile,
-  faFaceMeh,
-  faFaceFrown,
-  faFaceSadTear,
-} from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { Text } from '../components/Text';
 import { useTheme } from '../context/ThemeContext';
@@ -23,14 +16,7 @@ import {
   getTimeStr,
   getWeekdayKey,
 } from '@/helpers/date';
-
-const moodIcons: Record<string, IconProp> = {
-  awesome: faFaceGrinStars as IconProp,
-  good: faFaceSmile as IconProp,
-  okay: faFaceMeh as IconProp,
-  bad: faFaceFrown as IconProp,
-  awful: faFaceSadTear as IconProp,
-};
+import { moodIcons } from '@/constants/moodIcons';
 
 export default function MoodDetailsScreen() {
   const { t } = useTranslation();
@@ -59,7 +45,7 @@ export default function MoodDetailsScreen() {
       <View className="px-5 pt-4 pb-2 flex-row items-center gap-3">
         <TouchableOpacity onPress={() => navigation.goBack()} className="p-2">
           <FontAwesomeIcon
-            icon={faArrowLeft}
+            icon={faArrowLeft as IconProp}
             size={20}
             color={isDark ? '#d1d5db' : '#4b5563'}
           />
@@ -83,13 +69,21 @@ export default function MoodDetailsScreen() {
           </View>
 
           {/* Mood label */}
-          <Text weight="bold" className="text-2xl mb-2" style={{ color: textColor }}>
+          <Text
+            weight="bold"
+            className="text-2xl mb-2"
+            style={{ color: textColor }}
+          >
             {t(`moods.${mood.label}`)}
           </Text>
 
           {/* Date info */}
           <View className="flex-row items-center gap-1.5 mb-4">
-            <FontAwesomeIcon icon={dayTimeIcon} size={12} color={subTextColor} />
+            <FontAwesomeIcon
+              icon={dayTimeIcon}
+              size={12}
+              color={subTextColor}
+            />
             <Text className="text-sm" style={{ color: subTextColor }}>
               {timeStr}
             </Text>
@@ -104,7 +98,10 @@ export default function MoodDetailsScreen() {
           {/* Note if present */}
           {mood.note ? (
             <View className="w-full pt-4 border-t border-gray-200 dark:border-gray-700">
-              <Text className="text-base leading-6" style={{ color: textColor }}>
+              <Text
+                className="text-base leading-6"
+                style={{ color: textColor }}
+              >
                 {mood.note}
               </Text>
             </View>

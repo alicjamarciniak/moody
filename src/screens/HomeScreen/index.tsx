@@ -45,7 +45,12 @@ export default function HomeScreen() {
           >
             {t('home.timeline')}
           </Text>
-          <Timeline days={7} moods={moods} futureDays={2} todayMood={todayMood} />
+          <Timeline
+            days={7}
+            moods={moods}
+            futureDays={2}
+            todayMood={todayMood}
+          />
         </View>
 
         {/* Mood Summary Widget + Note Widget */}

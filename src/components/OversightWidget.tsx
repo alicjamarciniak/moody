@@ -18,10 +18,7 @@ export function OversightWidget() {
       activeOpacity={0.7}
     >
       <Ionicons name="analytics-outline" size={40} color="white" />
-      <Text
-        weight="bold"
-        className="text-lg text-center text-white"
-      >
+      <Text weight="bold" className="text-lg text-center text-white">
         {t('oversight.widget')}
       </Text>
     </TouchableOpacity>
