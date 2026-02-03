@@ -15,7 +15,10 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.anonymous.moody",
-      "googleServicesFile": "./GoogleService-Info.plist"
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -24,7 +27,7 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.anonymous.moody",
-      "googleServicesFile": "./android/app/google-services.json"
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/adaptive-moody-logo.png",
@@ -44,6 +47,17 @@
         }
       ],
       "./plugins/withFirebaseFix"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "82265738-c761-403f-aa24-459751c6c816"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/82265738-c761-403f-aa24-459751c6c816"
+    }
   }
 }
