@@ -12,6 +12,13 @@ import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { saveNote } from '../services/noteService';
 
+function toDateKey(date: Date): string {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
 export default function NoteScreen() {
   const { t } = useTranslation();
   const { isDark } = useTheme();
@@ -32,7 +39,7 @@ export default function NoteScreen() {
       await saveNote(user!.uid, {
         ...(trimmedTitle ? { title: trimmedTitle } : {}),
         text: trimmed,
-        date: now.toISOString().split('T')[0],
+        date: toDateKey(now),
         timestamp: now.getTime(),
       });
       navigation.goBack();

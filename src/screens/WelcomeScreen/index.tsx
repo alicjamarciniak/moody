@@ -17,6 +17,13 @@ import { saveMood } from '../../services/moodService';
 import { useAuth } from '../../context/AuthContext';
 import MoodPill from './MoodPill';
 
+function toDateKey(date: Date): string {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
 const colorMap: Record<string, { light: string; dark: string }> =
   MOOD_KEYS.reduce(
     (acc, key) => {
@@ -50,7 +57,7 @@ export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
       await saveMood(user!.uid, {
         value: mood.value,
         label: mood.label,
-        date: new Date().toISOString().split('T')[0],
+        date: toDateKey(new Date()),
         timestamp: Date.now(),
       });
 
