@@ -10,8 +10,14 @@ export const isToday = (date: Date) =>
   getToday().setHours(0, 0, 0, 0) === date.setHours(0, 0, 0, 0);
 
 export const isYesterday = (date: Date) => {
-  const today = getToday();
-  return today.setDate(today.getDate() - 1) == date.getDate();
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  yesterday.setHours(0, 0, 0, 0);
+
+  const checkDate = new Date(date);
+  checkDate.setHours(0, 0, 0, 0);
+
+  return yesterday.getTime() === checkDate.getTime();
 };
 
 export const getDayTime = (hour: number): DayTime => {
