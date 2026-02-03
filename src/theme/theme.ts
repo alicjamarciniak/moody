@@ -7,6 +7,10 @@ export interface ThemeColors extends MoodColors {
   light: string;
   dark: string;
   bubblegum: string;
+  darkGray: string;
+  lightGray: string;
+  dirtyWhite: string;
+  darkBlue: string;
 }
 
 export type MoodKey = (typeof MOOD_KEYS)[number];
@@ -16,9 +20,14 @@ export type MoodColors = {
 };
 
 const commonColors = {
+  bubblegum: colors.bubblegum[400],
   light: colors.light,
   dark: colors.dark,
-  bubblegum: colors.bubblegum[400],
+  darkGray: colors.darkGray,
+  lightGray: colors.lightGray,
+  midGray: colors.midGray,
+  dirtyWhite: colors.dirtyWhite,
+  darkBlue: colors.darkBlue,
 };
 
 export const lightTheme = {

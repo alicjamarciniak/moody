@@ -11,6 +11,8 @@ import { Button } from '../components/Button';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { saveNote } from '../services/noteService';
+import { colors } from '@/theme/colors';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 function toDateKey(date: Date): string {
   const y = date.getFullYear();
@@ -68,7 +70,7 @@ export default function NoteScreen() {
         </Text>
         <TouchableOpacity onPress={() => navigation.goBack()} className="p-2">
           <FontAwesomeIcon
-            icon={faXmark}
+            icon={faXmark as IconProp}
             size={22}
             color={isDark ? '#d1d5db' : '#4b5563'}
           />
@@ -112,6 +114,8 @@ export default function NoteScreen() {
       <View className="px-5 py-4">
         <Button
           text={t('note.save')}
+          darkColor={colors.dirtyWhite}
+          darkTextColor={colors.darkGray}
           size="lg"
           onPress={handleSave}
           disabled={!text.trim() || isSaving}

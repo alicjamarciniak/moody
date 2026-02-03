@@ -52,3 +52,7 @@ export const getTimeStr = (date: Date) => {
   const minutes = date.getMinutes().toString().padStart(2, '0');
   return `${hour}:${minutes}`;
 };
+
+export function getDaysInMonth(year: number, month: number) {
+  return new Date(year, month + 1, 0).getDate();
+}

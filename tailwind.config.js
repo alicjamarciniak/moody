@@ -35,6 +35,11 @@ module.exports = {
         },
         light: colors.light,
         dark: colors.dark,
+        darkGray: colors.darkGray,
+        lightGray: colors.lightGray,
+        midGray: colors.midGray,
+        dirtyWhite: colors.dirtyWhite,
+        darkBlue: colors.darkBlue,
         bubblegum: colors.bubblegum[400],
       },
       fontFamily: {

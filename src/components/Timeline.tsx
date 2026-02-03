@@ -4,6 +4,7 @@ import { useTheme } from '../context/ThemeContext';
 import { lightTheme, darkTheme, MoodKey } from '../theme/theme';
 import { MoodEntry } from '../types/mood';
 import { getMostFrequentMood } from '../hooks/useMoods';
+import { colors } from '@/theme/colors';
 
 const WEEKDAY_LETTERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
@@ -56,9 +57,8 @@ export function Timeline({ days, moods, futureDays = 2, todayMood }: TimelinePro
     items.push({ date: d, isFuture: true });
   }
 
-  const greyColor = isDark ? '#4b5563' : '#d1d5db';
-  const greyTextColor = isDark ? '#6b7280' : '#9ca3af';
-  const todayBorderColor = isDark ? '#e5e7eb' : '#374151';
+  const greyColor = isDark ? colors.midGray : colors.lightGray;
+  const todayBorderColor = isDark ? colors.dirtyWhite : colors.darkGray;
 
   return (
     <ScrollView
@@ -83,11 +83,14 @@ export function Timeline({ days, moods, futureDays = 2, todayMood }: TimelinePro
             : greyColor;
 
         return (
-          <View key={dateKey} className="items-center" style={{ width: 36 }}>
+          <View key={dateKey} className="items-center w-9">
             {/* Weekday letter */}
             <Text
-              className="text-xs mb-1"
-              style={{ color: item.isFuture ? greyTextColor : (isDark ? '#d1d5db' : '#4b5563') }}
+              className={`text-xs mb-1 ${
+                item.isFuture
+                  ? 'text-lightGray dark:text-midGray'
+                  : 'text-gray-600 dark:text-gray-300'
+              }`}
             >
               {weekdayLetter}
             </Text>
@@ -104,14 +107,13 @@ export function Timeline({ days, moods, futureDays = 2, todayMood }: TimelinePro
             >
               <Text
                 weight="medium"
-                className="text-xs"
-                style={{
-                  color: item.isFuture
-                    ? greyTextColor
+                className={`text-xs ${
+                  item.isFuture
+                    ? 'text-lightGray dark:text-midGray'
                     : hasMood
-                      ? (isDark ? '#f3f4f6' : '#1f2937')
-                      : (isDark ? '#9ca3af' : '#6b7280'),
-                }}
+                      ? 'text-darkGray dark:text-dirtyWhite'
+                      : 'text-midGray dark:text-lightGray'
+                }`}
               >
                 {dayOfMonth}
               </Text>

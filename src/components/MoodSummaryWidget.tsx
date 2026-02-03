@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { Text } from './Text';
 import { useTheme } from '../context/ThemeContext';
 import { lightTheme, MoodKey } from '../theme/theme';
+import { colors } from '@/theme/colors';
 
 const moodIcons: Record<string, IconProp> = {
   awesome: faFaceGrinStars as IconProp,
@@ -33,19 +34,15 @@ export function MoodSummaryWidget({ recentMood }: MoodSummaryWidgetProps) {
   const { isDark } = useTheme();
 
   if (!recentMood) {
-    const grayColor = isDark ? '#374151' : '#d1d5db';
-    const grayText = isDark ? '#9ca3af' : '#6b7280';
+    const grayIconColor = isDark ? colors.darkGray : colors.lightGray;
 
     return (
-      <View
-        className="p-6 rounded-2xl flex-row items-center gap-3 overflow-hidden flex-1"
-        style={{ backgroundColor: isDark ? '#1f2937' : '#e5e7eb' }}
-      >
+      <View className="p-6 rounded-2xl flex-row items-center gap-3 overflow-hidden flex-1 bg-gray-200 dark:bg-darkGray">
         <View className="flex gap-2 z-10">
-          <Text weight="bold" className="text-sm" style={{ color: grayText }}>
+          <Text weight="bold" className="text-sm text-midGray dark:text-lightGray">
             {t('home.summaryTitle', { mood: '' })}
           </Text>
-          <Text weight="bold" className="text-lg" style={{ color: grayText }}>
+          <Text weight="bold" className="text-lg text-midGray dark:text-lightGray">
             {t('home.noMoodYet')}
           </Text>
         </View>
@@ -54,7 +51,7 @@ export function MoodSummaryWidget({ recentMood }: MoodSummaryWidgetProps) {
           <FontAwesomeIcon
             icon={faCircleQuestion as IconProp}
             size={140}
-            color={grayColor}
+            color={grayIconColor}
             style={{ transform: [{ rotate: '-15deg' }] }}
           />
         </View>
@@ -68,7 +65,6 @@ export function MoodSummaryWidget({ recentMood }: MoodSummaryWidgetProps) {
   const moodColor = theme[topMood as MoodKey] ?? theme.okay;
   const icon = moodIcons[topMood] ?? moodIcons.okay;
   const isPositive = POSITIVE_MOODS.includes(topMood);
-  const textColor = isDark ? '#f3f4f6' : '#1f2937';
 
   return (
     <View
@@ -77,19 +73,18 @@ export function MoodSummaryWidget({ recentMood }: MoodSummaryWidgetProps) {
     >
       <View className="flex gap-2 z-10">
         <View className="gap-[0.5]">
-          <Text weight="bold" className="text-sm" style={{ color: textColor }}>
+          <Text weight="bold" className="text-sm text-darkGray dark:text-dirtyWhite">
             {t('home.summaryTitle', { mood: t(`moods.${topMood}`) })}
           </Text>
           <Text
             weight="bold"
-            className="text-xl uppercase"
-            style={{ color: textColor }}
+            className="text-xl uppercase text-darkGray dark:text-dirtyWhite"
           >
             {t(`moods.${topMood}`)}
           </Text>
         </View>
 
-        <Text className="text-sm text-wrap" style={{ color: textColor }}>
+        <Text className="text-sm text-wrap text-darkGray dark:text-dirtyWhite">
           {isPositive
             ? t('home.summaryPositive')
             : t('home.summaryEncouraging')}

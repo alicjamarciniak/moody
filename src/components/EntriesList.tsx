@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import React, { useMemo } from 'react';
-import { View, ActivityIndicator, ScrollView, RefreshControl } from 'react-native';
+import { View, ScrollView, RefreshControl } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { MoodCard } from './Mood/MoodCard';
@@ -9,8 +9,8 @@ import { MoodEntry } from '@/types/mood';
 import { Note } from '@/types/note';
 import { Text } from '@/components/Text';
 import { RootStackParamList } from '@/types/navigation';
-import { colors } from '@/theme/colors';
 import ScrollMask from './ScrollMask';
+import Spinner from './Spinner';
 
 type EntryItem =
   | { type: 'mood'; data: MoodEntry }
@@ -24,7 +24,13 @@ interface EntriesListProps {
   onRefresh?: () => void;
 }
 
-const EntriesList = ({ moods, notes, isLoading, refreshing, onRefresh }: EntriesListProps) => {
+const EntriesList = ({
+  moods,
+  notes,
+  isLoading,
+  refreshing,
+  onRefresh,
+}: EntriesListProps) => {
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -42,7 +48,7 @@ const EntriesList = ({ moods, notes, isLoading, refreshing, onRefresh }: Entries
     <View className="px-5 flex-1">
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color={colors.bubblegum[400]} />
+          <Spinner />
         </View>
       ) : entries.length === 0 ? (
         <View className="flex-1 items-center justify-center">
@@ -56,7 +62,12 @@ const EntriesList = ({ moods, notes, isLoading, refreshing, onRefresh }: Entries
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ paddingVertical: 16 }}
             refreshControl={
-              onRefresh ? <RefreshControl refreshing={refreshing ?? false} onRefresh={onRefresh} /> : undefined
+              onRefresh ? (
+                <RefreshControl
+                  refreshing={refreshing ?? false}
+                  onRefresh={onRefresh}
+                />
+              ) : undefined
             }
           >
             {entries.map((item) =>

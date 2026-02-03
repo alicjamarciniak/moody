@@ -12,6 +12,7 @@ import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { AVATARS, AVATAR_IMAGES, AvatarKey } from '../types/user';
 import { updateUserProfile } from '../services/userService';
+import { colors } from '@/theme/colors';
 
 export default function ProfileScreen() {
   const { t } = useTranslation();
@@ -96,8 +97,7 @@ export default function ProfileScreen() {
                   height: selectedAvatar === key ? 60 : 56,
                   borderRadius: selectedAvatar === key ? 30 : 28,
                   borderWidth: selectedAvatar === key ? 5 : 1,
-                  borderColor:
-                    selectedAvatar === key ? '#f472b6' : inputBorder,
+                  borderColor: selectedAvatar === key ? '#f472b6' : inputBorder,
                 }}
               />
             </Pressable>
@@ -134,6 +134,8 @@ export default function ProfileScreen() {
 
         <Button
           variant="solid"
+          darkColor={colors.dirtyWhite}
+          darkTextColor={colors.darkGray}
           size="lg"
           text={t('common.save')}
           onPress={handleSave}

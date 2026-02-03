@@ -1,5 +1,9 @@
 import React from 'react';
-import { TouchableOpacity, TouchableOpacityProps, ViewStyle } from 'react-native';
+import {
+  TouchableOpacity,
+  TouchableOpacityProps,
+  ViewStyle,
+} from 'react-native';
 import { Text } from './Text';
 import { useTheme } from '@/context/ThemeContext';
 
@@ -46,17 +50,30 @@ export function Button({
   const { isDark } = useTheme();
 
   const resolvedColor = isDark && darkColor ? darkColor : color;
-  const resolvedTextColor = isDark && darkTextColor ? darkTextColor : textColor;
+  const resolvedTextColor =
+    isDark && darkTextColor
+      ? darkTextColor
+      : isDark && darkColor
+        ? darkColor
+        : textColor;
 
   const variantClass =
     variant === 'solid'
-      ? 'bg-primary-dark dark:bg-primary'
-      : 'bg-transparent border-2 border-dark dark:border-light';
+      ? darkColor
+        ? 'bg-primary-dark dark:bg-primary'
+        : 'bg-primary-dark'
+      : darkColor
+        ? 'bg-transparent border-2 border-dark dark:border-light'
+        : 'bg-transparent border-2 border-dark';
 
   const defaultTextClass =
     variant === 'solid'
-      ? 'text-light dark:text-dark'
-      : 'text-dark dark:text-light';
+      ? darkTextColor
+        ? 'text-light dark:text-dark'
+        : 'text-light'
+      : darkTextColor
+        ? 'text-dark dark:text-light'
+        : 'text-dark';
 
   const colorStyle: ViewStyle =
     variant === 'solid'
@@ -77,7 +94,9 @@ export function Button({
         <Text
           weight={textWeight}
           className={`${textSizeStyles[size]} ${resolvedTextColor ? '' : defaultTextClass}`}
-          {...(resolvedTextColor ? { style: { color: resolvedTextColor } } : {})}
+          {...(resolvedTextColor
+            ? { style: { color: resolvedTextColor } }
+            : {})}
         >
           {text}
         </Text>

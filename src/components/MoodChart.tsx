@@ -13,10 +13,11 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTranslation } from 'react-i18next';
 import { Text } from './Text';
 import { useTheme } from '../context/ThemeContext';
-import { lightTheme, darkTheme, MoodKey } from '../theme/theme';
-import { MoodEntry } from '../types/mood';
+import { lightTheme, MoodKey } from '../theme/theme';
+import { MOOD_KEYS, MoodEntry } from '../types/mood';
+import { colors } from '@/theme/colors';
+import { getDaysInMonth } from '@/helpers/date';
 
-const MOOD_LABELS: MoodKey[] = ['awful', 'bad', 'okay', 'good', 'awesome'];
 const MOOD_ICONS = [
   faFaceSadTear,
   faFaceFrown,
@@ -37,17 +38,19 @@ interface MoodChartProps {
   scrollToEnd?: boolean;
 }
 
-function getDaysInMonth(year: number, month: number) {
-  return new Date(year, month + 1, 0).getDate();
-}
-
-export function MoodChart({ moods, year, month, scrollToEnd = false }: MoodChartProps) {
+export function MoodChart({
+  moods,
+  year,
+  month,
+  scrollToEnd = false,
+}: MoodChartProps) {
   const { t } = useTranslation();
   const { isDark } = useTheme();
   const theme = lightTheme; // Always use bright colors for better visibility
-  const textColor = isDark ? '#9ca3af' : '#6b7280';
-  const bgColor = isDark ? '#1f2937' : '#ffffff';
-  const ruleColor = isDark ? '#374151' : '#e5e7eb';
+  const textColor = isDark ? colors.lightGray : colors.midGray;
+  const ruleColor = isDark
+    ? colors.charcoalBlue[700]
+    : colors.charcoalBlue[100];
 
   const { data, lineSegments, hasData } = useMemo(() => {
     const totalDays = getDaysInMonth(year, month);
@@ -91,9 +94,10 @@ export function MoodChart({ moods, year, month, scrollToEnd = false }: MoodChart
     const rawByDay: Record<number, { value: number; mood: MoodKey }> = {};
     for (const day of daysWithData) {
       const dayMoods = moodByDay[day];
-      const avg = dayMoods.reduce((sum, m) => sum + m.value, 0) / dayMoods.length;
+      const avg =
+        dayMoods.reduce((sum, m) => sum + m.value, 0) / dayMoods.length;
       const value = Math.round(avg);
-      rawByDay[day] = { value, mood: MOOD_LABELS[value] };
+      rawByDay[day] = { value, mood: MOOD_KEYS[value] };
     }
 
     // Precompute boundary values for outside-range days
@@ -111,7 +115,7 @@ export function MoodChart({ moods, year, month, scrollToEnd = false }: MoodChart
     // Track the mood at each chart index (for segment coloring)
     const moodAtIndex: MoodKey[] = [];
     let lastKnownValue = firstValue;
-    let lastKnownMood: MoodKey = MOOD_LABELS[firstValue];
+    let lastKnownMood: MoodKey = MOOD_KEYS[firstValue];
 
     for (let day = 1; day <= totalDays; day++) {
       const showLabel = day % 2 === 1;
@@ -121,6 +125,7 @@ export function MoodChart({ moods, year, month, scrollToEnd = false }: MoodChart
       if (hasRealData) {
         lastKnownValue = rawByDay[day].value;
         lastKnownMood = rawByDay[day].mood;
+
         chartData.push({
           value: lastKnownValue,
           label: showLabel ? `${day}` : '',
@@ -146,14 +151,15 @@ export function MoodChart({ moods, year, month, scrollToEnd = false }: MoodChart
           labelTextStyle: { color: textColor, fontSize: 10 },
           hideDataPoint: true,
         });
-        moodAtIndex.push(MOOD_LABELS[boundaryValue]);
+        moodAtIndex.push(MOOD_KEYS[boundaryValue]);
       }
     }
 
     // Build line segments colored by the destination point's mood
     const rangeStart = firstDataDay - 1; // 0-based index
     const rangeEnd = lastDataDay - 1;
-    const segments: { startIndex: number; endIndex: number; color: string }[] = [];
+    const segments: { startIndex: number; endIndex: number; color: string }[] =
+      [];
 
     // Group consecutive indices that share the same destination mood
     let segStart = rangeStart;
@@ -189,7 +195,7 @@ export function MoodChart({ moods, year, month, scrollToEnd = false }: MoodChart
   const sectionHeight = CHART_HEIGHT / 4;
 
   return (
-    <View className="p-6 rounded-2xl" style={{ backgroundColor: bgColor }}>
+    <View className="p-6 rounded-2xl bg-white dark:bg-darkGray">
       <Text
         weight="bold"
         className="text-sm text-gray-600 dark:text-gray-400 mb-4"
@@ -199,15 +205,9 @@ export function MoodChart({ moods, year, month, scrollToEnd = false }: MoodChart
       <View className="flex-row">
         {/* Custom Y-axis with face icons */}
         <View
-          style={{
-            width: 30,
-            height: CHART_HEIGHT,
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingVertical: 2,
-          }}
+          className={`w-8 h-[${CHART_HEIGHT + 20}px] justify-between items-center py-[2px]`}
         >
-          {[...MOOD_LABELS].reverse().map((mood, index) => (
+          {[...MOOD_KEYS].reverse().map((mood, index) => (
             <FontAwesomeIcon
               key={mood}
               icon={MOOD_ICONS[4 - index] as IconProp}
@@ -218,7 +218,7 @@ export function MoodChart({ moods, year, month, scrollToEnd = false }: MoodChart
         </View>
 
         {/* Chart */}
-        <View className="flex-1">
+        <View className="flex-1 overflow-hidden">
           <LineChart
             data={data}
             height={CHART_HEIGHT}
@@ -228,7 +228,7 @@ export function MoodChart({ moods, year, month, scrollToEnd = false }: MoodChart
             thickness={2.5}
             hideDataPoints={false}
             dataPointsRadius={5}
-            dataPointsColor={isDark ? '#e5e7eb' : '#374151'}
+            dataPointsColor={isDark ? colors.dirtyWhite : colors.darkGray}
             color="transparent"
             lineSegments={lineSegments}
             xAxisLabelTextStyle={{ color: textColor, fontSize: 10 }}

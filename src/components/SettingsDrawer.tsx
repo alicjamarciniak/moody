@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { Modal, Pressable, Dimensions, View, TouchableOpacity } from 'react-native';
+import {
+  Modal,
+  Pressable,
+  Dimensions,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -13,6 +19,7 @@ import { Button } from './Button';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useAuth } from '../context/AuthContext';
 import { RootStackParamList } from '../types/navigation';
+import { colors } from '@/theme/colors';
 
 const DRAWER_WIDTH = Dimensions.get('window').width * 0.75;
 
@@ -24,11 +31,14 @@ interface SettingsDrawerProps {
 export function SettingsDrawer({ visible, onClose }: SettingsDrawerProps) {
   const { t } = useTranslation();
   const { signOut } = useAuth();
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const translateX = useSharedValue(DRAWER_WIDTH);
 
   useEffect(() => {
-    translateX.value = withTiming(visible ? 0 : DRAWER_WIDTH, { duration: 300 });
+    translateX.value = withTiming(visible ? 0 : DRAWER_WIDTH, {
+      duration: 300,
+    });
   }, [visible]);
 
   const animatedStyle = useAnimatedStyle(() => ({
@@ -36,7 +46,12 @@ export function SettingsDrawer({ visible, onClose }: SettingsDrawerProps) {
   }));
 
   return (
-    <Modal visible={visible} transparent animationType="none" onRequestClose={onClose}>
+    <Modal
+      visible={visible}
+      transparent
+      animationType="none"
+      onRequestClose={onClose}
+    >
       <Pressable onPress={onClose} className="flex-1 bg-black/40">
         <Animated.View
           style={[
@@ -83,6 +98,7 @@ export function SettingsDrawer({ visible, onClose }: SettingsDrawerProps) {
                 variant="outlined"
                 size="md"
                 text={t('auth.signOut')}
+                darkColor={colors.dirtyWhite}
                 onPress={signOut}
               />
             </View>

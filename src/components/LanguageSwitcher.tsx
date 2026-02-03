@@ -18,7 +18,9 @@ export function LanguageSwitcher() {
         <Text
           weight="medium"
           className={`font-semibold ${
-            language === 'en' ? 'text-dark dark:text-light' : 'text-dark/50 dark:text-light/50'
+            language === 'en'
+              ? 'text-dark dark:text-light'
+              : 'text-dark/50 dark:text-light/50'
           }`}
         >
           EN
@@ -36,7 +38,9 @@ export function LanguageSwitcher() {
         <Text
           weight="medium"
           className={`font-semibold ${
-            language === 'pl' ? 'text-dark dark:text-light' : 'text-dark/50 dark:text-light/50'
+            language === 'pl'
+              ? 'text-dark dark:text-light'
+              : 'text-dark/50 dark:text-light/50'
           }`}
         >
           PL

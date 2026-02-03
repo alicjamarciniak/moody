@@ -16,7 +16,6 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTranslation } from 'react-i18next';
 import { Text } from './Text';
 import { MoodEntry } from '../types/mood';
-import { useTheme } from '../context/ThemeContext';
 import { lightTheme, MoodKey } from '../theme/theme';
 
 const moodIcons: Record<string, IconProp> = {
@@ -48,8 +47,6 @@ export function StatisticsBlocks({
   month,
 }: StatisticsBlocksProps) {
   const { t } = useTranslation();
-  const { isDark } = useTheme();
-
   // Filter moods by selected year and month
   const filteredMoods = moods.filter((mood) => {
     const moodDate = new Date(mood.timestamp);
@@ -128,9 +125,6 @@ export function StatisticsBlocks({
   }
   longestStreak = Math.max(longestStreak, currentStreak);
 
-  const textColor = isDark ? '#f3f4f6' : '#1f2937';
-  const cardBg = isDark ? '#1f2937' : '#ffffff';
-
   const statistics = [
     {
       icon: topMood ? moodIcons[topMood] : faFaceSmile,
@@ -164,8 +158,7 @@ export function StatisticsBlocks({
       {statistics.map((stat, index) => (
         <View
           key={index}
-          className="flex-1 min-w-[45%] px-3 py-3 rounded-xl flex-row"
-          style={{ backgroundColor: cardBg }}
+          className="flex-1 min-w-[45%] px-3 py-3 rounded-xl flex-row bg-white dark:bg-darkGray"
         >
           <View
             className="w-10 h-10 rounded-full items-center justify-center mr-2"
@@ -183,8 +176,7 @@ export function StatisticsBlocks({
             </Text>
             <Text
               weight="bold"
-              className="text-mf text-center"
-              style={{ color: textColor }}
+              className="text-mf text-center text-darkGray dark:text-dirtyWhite"
             >
               {stat.value}
             </Text>

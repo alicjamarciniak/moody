@@ -5,6 +5,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { Text } from './Text';
 import { Note } from '../types/note';
 import { useTheme } from '../context/ThemeContext';
+import { colors } from '@/theme/colors';
 import {
   gateDateStr,
   getDayTimeIcon,
@@ -32,8 +33,8 @@ export function NoteCard({ note, onPress }: NoteCardProps) {
   const yesterday = isYesterday(date);
   const dateStr = today ? '' : yesterday ? 'Yesterday' : gateDateStr(date);
 
-  const textColor = isDark ? '#f3f4f6' : '#1f2937';
   const noteColor = isDark ? '#60a5fa' : '#3b82f6';
+  const iconTextColor = isDark ? colors.dirtyWhite : colors.darkGray;
 
   const Wrapper = onPress ? TouchableOpacity : View;
 
@@ -45,21 +46,21 @@ export function NoteCard({ note, onPress }: NoteCardProps) {
         style={{ backgroundColor: noteColor }}
       />
       <View className="flex-1 gap-1">
-        <Text weight="bold" className="text-xl" style={{ color: textColor }} numberOfLines={1} ellipsizeMode="tail">
+        <Text weight="bold" className="text-xl text-darkGray dark:text-dirtyWhite" numberOfLines={1} ellipsizeMode="tail">
           {note.title || note.text}
         </Text>
 
         <View className="flex-row items-center gap-1.5 mt-1">
-          <FontAwesomeIcon icon={dayTimeIcon} size={10} color={textColor} />
-          <Text className="text-sm mr-4" style={{ color: textColor }}>
+          <FontAwesomeIcon icon={dayTimeIcon} size={10} color={iconTextColor} />
+          <Text className="text-sm mr-4 text-darkGray dark:text-dirtyWhite">
             {timeStr}
           </Text>
           {!(today || yesterday) && (
-            <Text className="text-sm" style={{ color: textColor }}>
+            <Text className="text-sm text-darkGray dark:text-dirtyWhite">
               {t(`time.days.${weekday}`)},
             </Text>
           )}
-          <Text className="text-sm" style={{ color: textColor }}>
+          <Text className="text-sm text-darkGray dark:text-dirtyWhite">
             {dateStr}
           </Text>
         </View>

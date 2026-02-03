@@ -1,21 +1,15 @@
-import { LinearGradient } from 'expo-linear-gradient';
 import { t } from 'i18next';
 import React from 'react';
-import {
-  View,
-  ActivityIndicator,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import { View, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { MoodCard } from './MoodCard';
 import { MoodEntry } from '@/types/mood';
 import { Text } from '@/components/Text';
-import { useColorScheme } from 'nativewind';
 import { MainTabParamList } from '@/types/navigation';
 import { colors } from '@/theme/colors';
 import ScrollMask from '../ScrollMask';
+import Spinner from '../Spinner';
 
 interface MoodListProps {
   moods: MoodEntry[];
@@ -24,8 +18,6 @@ interface MoodListProps {
 }
 
 const MoodList = ({ moods, isLoading, limit }: MoodListProps) => {
-  const { colorScheme } = useColorScheme();
-  const isDark = colorScheme === 'dark';
   const navigation = useNavigation<BottomTabNavigationProp<MainTabParamList>>();
   const displayedMoods = limit ? moods.slice(0, limit) : moods;
   const hasMore = limit ? moods.length > limit : false;
@@ -40,7 +32,7 @@ const MoodList = ({ moods, isLoading, limit }: MoodListProps) => {
       </Text>
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color={colors.bubblegum[400]} />
+          <Spinner />
         </View>
       ) : moods.length === 0 ? (
         <View className="flex-1 items-center justify-center">
@@ -49,7 +41,7 @@ const MoodList = ({ moods, isLoading, limit }: MoodListProps) => {
           </Text>
         </View>
       ) : limit ? (
-        <View style={{ paddingVertical: 8 }}>
+        <View className="py-2">
           {displayedMoods.map((item) => (
             <MoodCard key={item.id} mood={item} variant="sm" />
           ))}

@@ -123,7 +123,8 @@ export const colors = {
   dark: '#191815',
 
   darkGray: '#1f2937',
-  lightGray: '',
+  lightGray: '#9ca3af',
+  midGray: '#6b7280',
 
   dirtyWhite: '#f3f4f6',
   darkBlue: '#111827',

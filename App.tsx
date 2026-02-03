@@ -1,6 +1,6 @@
 import './global.css';
 import './src/lib/i18n/config';
-import { View, ActivityIndicator } from 'react-native';
+import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
@@ -24,6 +24,7 @@ import MoodDetailsScreen from './src/screens/MoodDetailsScreen';
 import OversightScreen from './src/screens/OversightScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import { RootStackParamList } from './src/types/navigation';
+import Spinner from '@/components/Spinner';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -33,7 +34,7 @@ function RootNavigator() {
   if (isLoading) {
     return (
       <View className="flex-1 items-center justify-center bg-gray-100 dark:bg-gray-900">
-        <ActivityIndicator size="large" color="#f472b6" />
+        <Spinner />
       </View>
     );
   }

@@ -14,6 +14,7 @@ import { Text } from './Text';
 import { MoodEntry } from '../types/mood';
 import { useTheme } from '../context/ThemeContext';
 import { lightTheme, MoodKey } from '../theme/theme';
+import { colors } from '@/theme/colors';
 
 const moodIcons: Record<string, IconProp> = {
   awesome: faFaceGrinStars as IconProp,
@@ -102,8 +103,6 @@ export function MoodCountChart({ moods, year, month }: MoodCountChartProps) {
       text: '',
     }));
 
-  const textColor = isDark ? '#f3f4f6' : '#1f2937';
-
   if (totalMoods === 0) {
     return null;
   }
@@ -132,13 +131,12 @@ export function MoodCountChart({ moods, year, month }: MoodCountChartProps) {
               donut
               radius={56}
               innerRadius={40}
-              innerCircleColor={isDark ? '#1f2937' : '#ffffff'}
+              innerCircleColor={isDark ? colors.darkGray : '#ffffff'}
               centerLabelComponent={() => (
                 <View className="items-center justify-center">
                   <Text
                     weight="bold"
-                    className="text-3xl"
-                    style={{ color: textColor }}
+                    className="text-3xl text-darkGray dark:text-dirtyWhite"
                   >
                     {totalMoods}
                   </Text>

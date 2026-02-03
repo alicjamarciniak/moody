@@ -16,6 +16,7 @@ import { darkTheme, lightTheme } from '@/theme/theme';
 import { saveMood } from '../../services/moodService';
 import { useAuth } from '../../context/AuthContext';
 import MoodPill from './MoodPill';
+import { colors } from '@/theme/colors';
 
 function toDateKey(date: Date): string {
   const y = date.getFullYear();
@@ -126,6 +127,7 @@ export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
         <View className="flex-row px-8 pb-10 gap-3">
           <Button
             variant="outlined"
+            darkColor={colors.dirtyWhite}
             size="lg"
             text={t('common.skip')}
             onPress={handleSkip}
@@ -134,6 +136,8 @@ export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
 
           <Button
             variant="solid"
+            darkColor={colors.dirtyWhite}
+            darkTextColor={colors.darkBlue}
             size="lg"
             text={t('common.save')}
             onPress={handleSave}

@@ -52,7 +52,7 @@ export function MoodCard({ mood, variant = 'lg', onPress }: MoodCardProps) {
   const theme = lightTheme;
   const moodColor = theme[mood.label as MoodKey] ?? theme.okay;
   const icon = moodIcons[mood.label] ?? moodIcons.okay;
-  const textColor = isDark ? colors.dirtyWhite : colors.darkGray;
+  const iconTextColor = isDark ? colors.dirtyWhite : colors.darkGray;
   const isSmall = variant === 'sm';
 
   const Wrapper = onPress ? TouchableOpacity : View;
@@ -61,7 +61,7 @@ export function MoodCard({ mood, variant = 'lg', onPress }: MoodCardProps) {
     <Wrapper
       onPress={onPress}
       activeOpacity={0.7}
-      className={`${isSmall ? 'pl-7 pr-4 py-3' : 'pl-9 pr-6 py-6'} 
+      className={`${isSmall ? 'pl-7 pr-4 py-3' : 'pl-9 pr-6 py-6'}
       rounded-2xl mb-3 flex-row items-center gap-3 overflow-hidden bg-white dark:bg-gray-800`}
     >
       {/* Color strip */}
@@ -73,8 +73,7 @@ export function MoodCard({ mood, variant = 'lg', onPress }: MoodCardProps) {
       <View className="flex-1 gap-1">
         <Text
           weight="bold"
-          className={isSmall ? 'text-base' : 'text-xl'}
-          style={{ color: textColor }}
+          className={`${isSmall ? 'text-base' : 'text-xl'} text-darkGray dark:text-dirtyWhite`}
         >
           {t(`moods.${mood.label}`)}
         </Text>
@@ -83,25 +82,22 @@ export function MoodCard({ mood, variant = 'lg', onPress }: MoodCardProps) {
           <FontAwesomeIcon
             icon={dayTimeIcon}
             size={isSmall ? 8 : 10}
-            color={textColor}
+            color={iconTextColor}
           />
           <Text
-            className={`${isSmall ? 'text-xs' : 'text-sm'} mr-4`}
-            style={{ color: textColor }}
+            className={`${isSmall ? 'text-xs' : 'text-sm'} mr-4 text-darkGray dark:text-dirtyWhite`}
           >
             {timeStr}
           </Text>
           {!(today || yesterday) && (
             <Text
-              className={isSmall ? 'text-xs' : 'text-sm'}
-              style={{ color: textColor }}
+              className={`${isSmall ? 'text-xs' : 'text-sm'} text-darkGray dark:text-dirtyWhite`}
             >
               {t(`time.days.${weekday}`)},
             </Text>
           )}
           <Text
-            className={isSmall ? 'text-xs' : 'text-sm'}
-            style={{ color: textColor }}
+            className={`${isSmall ? 'text-xs' : 'text-sm'} text-darkGray dark:text-dirtyWhite`}
           >
             {dateStr}
           </Text>
