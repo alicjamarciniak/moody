@@ -121,4 +121,10 @@ export const colors = {
   /* Common colors */
   light: '#faf9f6',
   dark: '#191815',
+
+  darkGray: '#1f2937',
+  lightGray: '',
+
+  dirtyWhite: '#f3f4f6',
+  darkBlue: '#111827',
 };

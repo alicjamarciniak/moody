@@ -10,9 +10,9 @@ import {
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTranslation } from 'react-i18next';
 import { Text } from '../Text';
-import { MoodEntry } from '../../types/mood';
-import { useTheme } from '../../context/ThemeContext';
-import { lightTheme, MoodKey } from '../../theme/theme';
+import { MoodEntry } from '@/types/mood';
+import { useTheme } from '@/context/ThemeContext';
+import { lightTheme, MoodKey } from '@/theme/theme';
 import {
   gateDateStr,
   getDayTimeIcon,
@@ -21,6 +21,7 @@ import {
   isToday,
   isYesterday,
 } from '@/helpers/date';
+import { colors } from '@/theme/colors';
 
 const moodIcons: Record<string, IconProp> = {
   awesome: faFaceGrinStars as IconProp,
@@ -51,7 +52,7 @@ export function MoodCard({ mood, variant = 'lg', onPress }: MoodCardProps) {
   const theme = lightTheme;
   const moodColor = theme[mood.label as MoodKey] ?? theme.okay;
   const icon = moodIcons[mood.label] ?? moodIcons.okay;
-  const textColor = isDark ? '#f3f4f6' : '#1f2937';
+  const textColor = isDark ? colors.dirtyWhite : colors.darkGray;
   const isSmall = variant === 'sm';
 
   const Wrapper = onPress ? TouchableOpacity : View;
@@ -60,7 +61,8 @@ export function MoodCard({ mood, variant = 'lg', onPress }: MoodCardProps) {
     <Wrapper
       onPress={onPress}
       activeOpacity={0.7}
-      className={`${isSmall ? 'pl-7 pr-4 py-3' : 'pl-9 pr-6 py-6'} rounded-2xl mb-3 flex-row items-center gap-3 overflow-hidden bg-white dark:bg-gray-800`}
+      className={`${isSmall ? 'pl-7 pr-4 py-3' : 'pl-9 pr-6 py-6'} 
+      rounded-2xl mb-3 flex-row items-center gap-3 overflow-hidden bg-white dark:bg-gray-800`}
     >
       {/* Color strip */}
       <View
@@ -69,21 +71,38 @@ export function MoodCard({ mood, variant = 'lg', onPress }: MoodCardProps) {
       />
       {/* Content */}
       <View className="flex-1 gap-1">
-        <Text weight="bold" className={isSmall ? 'text-base' : 'text-xl'} style={{ color: textColor }}>
+        <Text
+          weight="bold"
+          className={isSmall ? 'text-base' : 'text-xl'}
+          style={{ color: textColor }}
+        >
           {t(`moods.${mood.label}`)}
         </Text>
 
         <View className="flex-row items-center gap-1.5 mt-1">
-          <FontAwesomeIcon icon={dayTimeIcon} size={isSmall ? 8 : 10} color={textColor} />
-          <Text className={`${isSmall ? 'text-xs' : 'text-sm'} mr-4`} style={{ color: textColor }}>
+          <FontAwesomeIcon
+            icon={dayTimeIcon}
+            size={isSmall ? 8 : 10}
+            color={textColor}
+          />
+          <Text
+            className={`${isSmall ? 'text-xs' : 'text-sm'} mr-4`}
+            style={{ color: textColor }}
+          >
             {timeStr}
           </Text>
           {!(today || yesterday) && (
-            <Text className={isSmall ? 'text-xs' : 'text-sm'} style={{ color: textColor }}>
+            <Text
+              className={isSmall ? 'text-xs' : 'text-sm'}
+              style={{ color: textColor }}
+            >
               {t(`time.days.${weekday}`)},
             </Text>
           )}
-          <Text className={isSmall ? 'text-xs' : 'text-sm'} style={{ color: textColor }}>
+          <Text
+            className={isSmall ? 'text-xs' : 'text-sm'}
+            style={{ color: textColor }}
+          >
             {dateStr}
           </Text>
         </View>
@@ -94,7 +113,11 @@ export function MoodCard({ mood, variant = 'lg', onPress }: MoodCardProps) {
         className={`${isSmall ? 'w-10 h-10' : 'w-16 h-16'} rounded-full items-center justify-center`}
         style={{ backgroundColor: moodColor + '4D' }}
       >
-        <FontAwesomeIcon icon={icon} size={isSmall ? 22 : 35} color={moodColor} />
+        <FontAwesomeIcon
+          icon={icon}
+          size={isSmall ? 22 : 35}
+          color={moodColor}
+        />
       </View>
     </Wrapper>
   );

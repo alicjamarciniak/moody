@@ -15,6 +15,7 @@ import { Text } from '@/components/Text';
 import { useColorScheme } from 'nativewind';
 import { MainTabParamList } from '@/types/navigation';
 import { colors } from '@/theme/colors';
+import ScrollMask from '../ScrollMask';
 
 interface MoodListProps {
   moods: MoodEntry[];
@@ -67,22 +68,7 @@ const MoodList = ({ moods, isLoading, limit }: MoodListProps) => {
               </TouchableOpacity>
             )}
           </ScrollView>
-          {/* Top fade */}
-          <LinearGradient
-            colors={
-              isDark ? ['#111827', '#11182700'] : ['#f3f4f6', '#f3f4f600']
-            }
-            className="absolute top-0 left-0 right-0 h-6 z-10"
-            pointerEvents="none"
-          />
-          {/* Bottom fade */}
-          <LinearGradient
-            colors={
-              isDark ? ['#11182700', '#111827'] : ['#f3f4f600', '#f3f4f6']
-            }
-            className="absolute bottom-0 left-0 right-0 h-6 z-10"
-            pointerEvents="none"
-          />
+          <ScrollMask />
         </View>
       )}
     </View>

@@ -1,4 +1,3 @@
-import { LinearGradient } from 'expo-linear-gradient';
 import { useTranslation } from 'react-i18next';
 import React, { useMemo } from 'react';
 import { View, ActivityIndicator, ScrollView } from 'react-native';
@@ -9,8 +8,9 @@ import { NoteCard } from './NoteCard';
 import { MoodEntry } from '@/types/mood';
 import { Note } from '@/types/note';
 import { Text } from '@/components/Text';
-import { useColorScheme } from 'nativewind';
 import { RootStackParamList } from '@/types/navigation';
+import { colors } from '@/theme/colors';
+import ScrollMask from './ScrollMask';
 
 type EntryItem =
   | { type: 'mood'; data: MoodEntry }
@@ -24,9 +24,8 @@ interface EntriesListProps {
 
 const EntriesList = ({ moods, notes, isLoading }: EntriesListProps) => {
   const { t } = useTranslation();
-  const { colorScheme } = useColorScheme();
-  const isDark = colorScheme === 'dark';
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const entries = useMemo(() => {
     const items: EntryItem[] = [
@@ -41,7 +40,7 @@ const EntriesList = ({ moods, notes, isLoading }: EntriesListProps) => {
     <View className="px-5 flex-1">
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#10b981" />
+          <ActivityIndicator size="large" color={colors.bubblegum[400]} />
         </View>
       ) : entries.length === 0 ? (
         <View className="flex-1 items-center justify-center">
@@ -60,33 +59,22 @@ const EntriesList = ({ moods, notes, isLoading }: EntriesListProps) => {
                 <MoodCard
                   key={`mood-${item.data.id}`}
                   mood={item.data}
-                  onPress={() => navigation.navigate('MoodDetails', { mood: item.data })}
+                  onPress={() =>
+                    navigation.navigate('MoodDetails', { mood: item.data })
+                  }
                 />
               ) : (
                 <NoteCard
                   key={`note-${item.data.id}`}
                   note={item.data}
-                  onPress={() => navigation.navigate('NoteDetails', { note: item.data })}
+                  onPress={() =>
+                    navigation.navigate('NoteDetails', { note: item.data })
+                  }
                 />
               )
             )}
           </ScrollView>
-          {/* Top fade */}
-          <LinearGradient
-            colors={
-              isDark ? ['#111827', '#11182700'] : ['#f3f4f6', '#f3f4f600']
-            }
-            className="absolute top-0 left-0 right-0 h-6 z-10"
-            pointerEvents="none"
-          />
-          {/* Bottom fade */}
-          <LinearGradient
-            colors={
-              isDark ? ['#11182700', '#111827'] : ['#f3f4f600', '#f3f4f6']
-            }
-            className="absolute bottom-0 left-0 right-0 h-6 z-10"
-            pointerEvents="none"
-          />
+          <ScrollMask />
         </>
       )}
     </View>

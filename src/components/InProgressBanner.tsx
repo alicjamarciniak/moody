@@ -19,7 +19,7 @@ export function InProgressBanner() {
       />
       <Text
         weight="bold"
-        className="text-lg mt-5 text-center"
+        className="text-lg mt-5 text-center "
         style={{ color: textColor }}
       >
         {t('common.inProgress')}
