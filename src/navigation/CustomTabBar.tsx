@@ -1,5 +1,6 @@
 import { View, TouchableOpacity } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -13,6 +14,7 @@ export function CustomTabBar({
   navigation,
 }: BottomTabBarProps) {
   const { colors } = useTheme();
+  const insets = useSafeAreaInsets();
 
   // Hide tab bar on Welcome screen
   const currentRoute = state.routes[state.index];
@@ -38,7 +40,7 @@ export function CustomTabBar({
   };
 
   return (
-    <View className="flex-row h-[60px] border-t border-gray-200 dark:border-gray-700 pb-[5px] bg-light dark:bg-dark">
+    <View className="flex-row border-t border-gray-200 dark:border-gray-700 bg-light dark:bg-dark" style={{ height: 60 + insets.bottom, paddingBottom: insets.bottom }}>
       {state.routes.map((route, index) => {
         const {
           options: { tabBarIcon, tabBarLabel },

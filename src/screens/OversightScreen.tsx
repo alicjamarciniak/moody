@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -23,7 +23,14 @@ type Tab = 'month' | 'year';
 export default function OversightScreen() {
   const { t, i18n } = useTranslation();
   const { isDark } = useTheme();
-  const { moods } = useMoods();
+  const { moods, refetch } = useMoods();
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  }, [refetch]);
   const navigation = useNavigation();
   const [activeTab, setActiveTab] = useState<Tab>('month');
 
@@ -108,7 +115,13 @@ export default function OversightScreen() {
       </View>
 
       {/* Content */}
-      <ScrollView className="flex-1 px-5" showsVerticalScrollIndicator={false}>
+      <ScrollView
+        className="flex-1 px-5"
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         {activeTab === 'month' ? (
           <View>
             {/* Month Switcher */}

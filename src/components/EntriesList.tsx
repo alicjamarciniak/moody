@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import React, { useMemo } from 'react';
-import { View, ActivityIndicator, ScrollView } from 'react-native';
+import { View, ActivityIndicator, ScrollView, RefreshControl } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { MoodCard } from './Mood/MoodCard';
@@ -20,9 +20,11 @@ interface EntriesListProps {
   moods: MoodEntry[];
   notes: Note[];
   isLoading: boolean;
+  refreshing?: boolean;
+  onRefresh?: () => void;
 }
 
-const EntriesList = ({ moods, notes, isLoading }: EntriesListProps) => {
+const EntriesList = ({ moods, notes, isLoading, refreshing, onRefresh }: EntriesListProps) => {
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -53,6 +55,9 @@ const EntriesList = ({ moods, notes, isLoading }: EntriesListProps) => {
           <ScrollView
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ paddingVertical: 16 }}
+            refreshControl={
+              onRefresh ? <RefreshControl refreshing={refreshing ?? false} onRefresh={onRefresh} /> : undefined
+            }
           >
             {entries.map((item) =>
               item.type === 'mood' ? (

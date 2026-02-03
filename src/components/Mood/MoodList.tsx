@@ -48,6 +48,22 @@ const MoodList = ({ moods, isLoading, limit }: MoodListProps) => {
             {t('home.noMoods')}
           </Text>
         </View>
+      ) : limit ? (
+        <View style={{ paddingVertical: 8 }}>
+          {displayedMoods.map((item) => (
+            <MoodCard key={item.id} mood={item} variant="sm" />
+          ))}
+          {hasMore && (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Entries')}
+              className="items-center py-2"
+            >
+              <Text weight="medium" className="text-bubblegum">
+                {t('home.seeMore')}
+              </Text>
+            </TouchableOpacity>
+          )}
+        </View>
       ) : (
         <View className="flex-1 relative">
           <ScrollView
@@ -57,16 +73,6 @@ const MoodList = ({ moods, isLoading, limit }: MoodListProps) => {
             {displayedMoods.map((item) => (
               <MoodCard key={item.id} mood={item} variant="sm" />
             ))}
-            {hasMore && (
-              <TouchableOpacity
-                onPress={() => navigation.navigate('Entries')}
-                className="items-center py-2"
-              >
-                <Text weight="medium" className="text-bubblegum">
-                  {t('home.seeMore')}
-                </Text>
-              </TouchableOpacity>
-            )}
           </ScrollView>
           <ScrollMask />
         </View>
