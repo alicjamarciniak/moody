@@ -1,15 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
 import { View, Alert } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import Animated from 'react-native-reanimated';
 import { Text } from '../../components/Text';
 import { Button } from '../../components/Button';
+import { ScreenWrapper } from '../../components/ScreenWrapper';
 import { MOOD_KEYS, MoodOption, MOODS } from '../../types/mood';
 import { RootStackParamList } from '../../types/navigation';
-import { LanguageSwitcher } from '../../components/LanguageSwitcher';
 import { MoodAnimation } from '../../components/MoodAnimation';
 import { useBackgroundColorAnimation } from '../../hooks/useBackgroundColorAnimation';
 import { darkTheme, lightTheme } from '@/theme/theme';
@@ -37,7 +35,6 @@ const colorMap: Record<string, { light: string; dark: string }> =
 type WelcomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Welcome'>;
 
 export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
-  const insets = useSafeAreaInsets();
   const { t } = useTranslation();
   const { user } = useAuth();
   const [selectedMood, setSelectedMood] = useState<number | null>(2);
@@ -85,15 +82,7 @@ export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
 
   return (
     <Animated.View style={[{ flex: 1 }, animatedStyle]}>
-      <View
-        style={{
-          flex: 1,
-          marginTop: Math.max(insets.top, 16),
-          marginBottom: Math.max(insets.bottom, 16),
-        }}
-      >
-        <StatusBar style="light" />
-
+      <ScreenWrapper className="flex-1" statusBarStyle="light">
         <View className="flex-1 items-center justify-center px-4">
           <Text className="text-xl text-dark dark:text-light mb-6 text-center">
             {t('welcome.title')}
@@ -145,7 +134,7 @@ export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
             className="flex-1"
           />
         </View>
-      </View>
+      </ScreenWrapper>
     </Animated.View>
   );
 }

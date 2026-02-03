@@ -1,11 +1,10 @@
 import { View, ScrollView, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { StatusBar } from 'expo-status-bar';
 import { useTranslation } from 'react-i18next';
 import { useRoute, useNavigation, RouteProp } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Text } from '../components/Text';
+import { ScreenWrapper } from '../components/ScreenWrapper';
 import { useTheme } from '../context/ThemeContext';
 import { RootStackParamList } from '../types/navigation';
 import {
@@ -32,9 +31,7 @@ export default function NoteDetailsScreen() {
   const subTextColor = isDark ? '#9ca3af' : '#6b7280';
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100 dark:bg-gray-900">
-      <StatusBar style={isDark ? 'light' : 'dark'} />
-
+    <ScreenWrapper>
       {/* Header */}
       <View className="px-5 pt-4 pb-2 flex-row items-center gap-3">
         <TouchableOpacity onPress={() => navigation.goBack()} className="p-2">
@@ -81,6 +78,6 @@ export default function NoteDetailsScreen() {
           </Text>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 }

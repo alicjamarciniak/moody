@@ -1,10 +1,8 @@
 import { useState, useCallback } from 'react';
 import { View, ScrollView, RefreshControl } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { StatusBar } from 'expo-status-bar';
 import { useTranslation } from 'react-i18next';
 import { Text } from '../../components/Text';
-import { useTheme } from '../../context/ThemeContext';
+import { ScreenWrapper } from '../../components/ScreenWrapper';
 import MoodList from '@/components/Mood/MoodList';
 import { Timeline } from '@/components/Timeline';
 import { useMoods } from '@/hooks/useMoods';
@@ -15,7 +13,6 @@ import Header from './Header';
 
 export default function HomeScreen() {
   const { t } = useTranslation();
-  const { isDark } = useTheme();
   const { moods, isLoading, refetch, todayMood, recentMood } = useMoods();
   const [refreshing, setRefreshing] = useState(false);
 
@@ -26,9 +23,7 @@ export default function HomeScreen() {
   }, [refetch]);
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100 dark:bg-gray-900">
-      <StatusBar style={isDark ? 'light' : 'dark'} />
-
+    <ScreenWrapper>
       <Header />
 
       <ScrollView
@@ -71,6 +66,6 @@ export default function HomeScreen() {
         {/* Mood List */}
         <MoodList moods={moods} isLoading={isLoading} limit={5} />
       </ScrollView>
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 }

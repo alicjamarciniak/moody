@@ -8,14 +8,13 @@ import {
   Pressable,
   ImageBackground,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { StatusBar } from 'expo-status-bar';
 import { useTranslation } from 'react-i18next';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { Text } from '../components/Text';
 import { Button } from '../components/Button';
+import { ScreenWrapper } from '../components/ScreenWrapper';
 import { useAuth } from '../context/AuthContext';
 import { RootStackParamList } from '../types/navigation';
 import { colors } from '@/theme/colors';
@@ -79,8 +78,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
         style={{ flex: 1 }}
         imageStyle={{ opacity: 1 }}
       >
-        <SafeAreaView className="flex-1">
-          <StatusBar style="dark" />
+        <ScreenWrapper className="flex-1" statusBarStyle="dark">
           <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             className="flex-1"
@@ -191,7 +189,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
               </View>
             </View>
           </KeyboardAvoidingView>
-        </SafeAreaView>
+        </ScreenWrapper>
       </ImageBackground>
     </View>
   );

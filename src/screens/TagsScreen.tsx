@@ -1,18 +1,14 @@
 import { View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { StatusBar } from 'expo-status-bar';
 import { useTranslation } from 'react-i18next';
 import { Text } from '../components/Text';
 import { InProgressBanner } from '../components/InProgressBanner';
-import { useTheme } from '../context/ThemeContext';
+import { ScreenWrapper } from '../components/ScreenWrapper';
 
 export default function TagsScreen() {
   const { t } = useTranslation();
-  const { isDark } = useTheme();
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100 dark:bg-gray-900">
-      <StatusBar style={isDark ? 'light' : 'dark'} />
+    <ScreenWrapper>
       <View className="px-5 pt-4 pb-2">
         <Text
           weight="bold"
@@ -27,6 +23,6 @@ export default function TagsScreen() {
       <View className="flex-1 items-center justify-center p-5">
         <InProgressBanner />
       </View>
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 }

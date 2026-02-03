@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Alert } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { StatusBar } from 'expo-status-bar';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Text } from '../components/Text';
 import { Button } from '../components/Button';
+import { ScreenWrapper } from '../components/ScreenWrapper';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { saveNote } from '../services/noteService';
@@ -57,9 +56,7 @@ export default function NoteScreen() {
   const placeholderColor = isDark ? '#6b7280' : '#9ca3af';
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100 dark:bg-gray-900">
-      <StatusBar style={isDark ? 'light' : 'dark'} />
-
+    <ScreenWrapper>
       {/* Header */}
       <View className="px-5 pt-4 pb-2 flex-row justify-between items-center">
         <Text
@@ -122,6 +119,6 @@ export default function NoteScreen() {
           style={{ opacity: !text.trim() || isSaving ? 0.5 : 1 }}
         />
       </View>
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 }

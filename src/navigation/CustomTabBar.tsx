@@ -40,7 +40,10 @@ export function CustomTabBar({
   };
 
   return (
-    <View className="flex-row border-t border-gray-200 dark:border-gray-700 bg-light dark:bg-dark" style={{ height: 60 + insets.bottom, paddingBottom: insets.bottom }}>
+    <View
+      className="flex-row border-t border-gray-200 dark:border-gray-700 bg-light dark:bg-dark"
+      style={{ height: 60 + insets.bottom, paddingBottom: insets.bottom }}
+    >
       {state.routes.map((route, index) => {
         const {
           options: { tabBarIcon, tabBarLabel },

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Image, Pressable, TextInput, Alert } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +7,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTranslation } from 'react-i18next';
 import { Text } from '../components/Text';
 import { Button } from '../components/Button';
+import { ScreenWrapper } from '../components/ScreenWrapper';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { AVATARS, AVATAR_IMAGES, AvatarKey } from '../types/user';
@@ -55,7 +55,7 @@ export default function ProfileScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100 dark:bg-gray-900">
+    <ScreenWrapper>
       {/* Header */}
       <View className="flex-row items-center px-5 py-3">
         <Pressable onPress={() => navigation.goBack()} className="mr-3">
@@ -143,6 +143,6 @@ export default function ProfileScreen() {
           style={{ opacity: isSaving || !hasChanges ? 0.5 : 1 }}
         />
       </View>
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 }

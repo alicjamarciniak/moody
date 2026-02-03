@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import { View, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
@@ -14,6 +13,7 @@ import { Text } from '../components/Text';
 import { MoodChart } from '../components/MoodChart';
 import { MoodCountChart } from '../components/MoodCountChart';
 import { StatisticsBlocks } from '../components/StatisticsBlocks';
+import { ScreenWrapper } from '../components/ScreenWrapper';
 import { useTheme } from '../context/ThemeContext';
 import { InProgressBanner } from '../components/InProgressBanner';
 import { useMoods } from '../hooks/useMoods';
@@ -74,7 +74,7 @@ export default function OversightScreen() {
   const activeBg = isDark ? '#374151' : '#e5e7eb';
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100 dark:bg-gray-900">
+    <ScreenWrapper>
       {/* Header */}
       <View className="flex-row items-center px-5 py-3">
         <TouchableOpacity onPress={() => navigation.goBack()} className="mr-3">
@@ -208,6 +208,6 @@ export default function OversightScreen() {
           </View>
         )}
       </ScrollView>
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 }
