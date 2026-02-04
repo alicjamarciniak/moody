@@ -2,6 +2,16 @@
 
 A modern mood tracking mobile application that helps you monitor and understand your emotional well-being over time. Moody combines a beautiful, intuitive interface with powerful analytics to help you identify patterns in your moods, maintain a personal diary, and gain insights into your mental health journey.
 
+
+<div align="center">
+  
+|   |   |   |   |
+|---|---|---|---|
+| ![hippo](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnBsbmQ1eHkxdzk5NnJlcHpidXJ0cjF1NmVxcDBrZzh6dGkyd2FkNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/EZhUN4SRtTH4w7Yquv/giphy.gif)| <img src="https://github.com/alicjamarciniak/moody/blob/screenshots/screenshots/Screenshot_1770028443.png" width="200"/> | <img src="https://github.com/alicjamarciniak/moody/blob/screenshots/screenshots/Screenshot_1770166658.png" width="200"/> | <img src="https://github.com/alicjamarciniak/moody/blob/screenshots/screenshots/Screenshot_1770167141.png" width="200"/> | 
+
+</div>
+
+
 ## Features
 
 - 😄🫶 Mood Tracking: Check in with your vibes daily using fun, visual mood icons
@@ -18,6 +28,15 @@ A modern mood tracking mobile application that helps you monitor and understand 
 - ✍️🧠 Personal Diary: Brain-dump your thoughts, feelings, and random moments
 - 🏷️✨ Tags System: Label your moods so future-you actually understands them
 
+<div align="center">
+
+|   |   |   |
+|---|---|---|
+| <img src="https://github.com/alicjamarciniak/moody/blob/screenshots/screenshots/Screenshot_1770167156.png" width="200"/> | <img src="https://github.com/alicjamarciniak/moody/blob/screenshots/screenshots/Screenshot_1770167367.png" width="200"/> | <img src="https://github.com/alicjamarciniak/moody/blob/screenshots/screenshots/Screenshot_1770167384.png" width="200"/> |
+
+</div>
+
+
 ## Installation
 
 ### Android
@@ -31,6 +50,14 @@ Download and install the latest APK:
 5. Launch Moody and start tracking your moods!
 
 **Note**: iOS installation is not available yet.
+
+<div align="center">
+
+|  DARK MODE  |  IOS  |
+|---|---|
+| <img src="https://github.com/alicjamarciniak/moody/blob/screenshots/screenshots/Screenshot_1770167779.png" width="300"/> | <img src="https://github.com/alicjamarciniak/moody/blob/screenshots/screenshots/Screenshot-ios.png" width="300"/> |
+
+</div>
 
 ## Local Development
 
