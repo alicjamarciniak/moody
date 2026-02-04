@@ -4,16 +4,19 @@ A modern mood tracking mobile application that helps you monitor and understand 
 
 ## Features
 
-- **Mood Tracking**: Log your daily moods with an easy-to-use interface and visual mood indicators
-- **Interactive Charts & Analytics**: Visualize your mood trends over time with beautiful, interactive charts and statistics
-- **Personal Diary**: Write notes and journal entries to capture thoughts and context behind your moods
-- **Timeline View**: Browse your emotional history in a chronological timeline
-- **Tags System**: Categorize and organize your mood entries with custom tags
-- **Statistics Dashboard**: Get comprehensive insights into your mood patterns and trends
-- **User Authentication**: Secure sign-up and login with email or Google authentication
-- **Dark Mode**: Switch between light and dark themes for comfortable viewing
-- **Multi-language Support**: Available in English and Polish
-- **Offline-ready**: Your data syncs seamlessly when you're back online
+- 😄🫶 Mood Tracking: Check in with your vibes daily using fun, visual mood icons
+- 📊🔥 Interactive Charts & Analytics: See your mood glow up with colorful charts and smart stats
+- 🕰️🌀 Timeline View: Scroll your emotional lore in a clean, chronological feed
+- 📈👀 Statistics Dashboard: Spot patterns, trends, and “oh wow” moments in your data
+- 🔐💅 User Authentication: Secure sign-in, no stress — email or Google
+- 🌙😴 Dark Mode: For night owls, doom-scrollers, and cozy vibes
+- 🌍💬 Multi-language Support: English & Polish — because global energy
+- 📶🫡 Offline-ready: No signal? No problem. Syncs when you’re back
+
+### Planned for the future:
+
+- ✍️🧠 Personal Diary: Brain-dump your thoughts, feelings, and random moments
+- 🏷️✨ Tags System: Label your moods so future-you actually understands them
 
 ## Installation
 
