@@ -20,6 +20,12 @@ import { RootStackParamList } from '../types/navigation';
 import { colors } from '@/theme/colors';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
+// TODO: Refactor:
+// - move TextInput to separate component with error message
+// - move validation check to validation helper
+// - replace hex colors with variables
+// - remove inline styles
+
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type LoginScreenProps = NativeStackScreenProps<RootStackParamList, 'Login'>;
@@ -178,7 +184,9 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
               />
 
               <View className="flex-row justify-center mt-6">
-                <Text style={{ color: '#6b7280' }}>{t('auth.noAccount')} </Text>
+                <Text className="text-midGray" style={{ color: '#6b7280' }}>
+                  {t('auth.noAccount')}{' '}
+                </Text>
                 <Text
                   weight="bold"
                   className="text-bubblegum"

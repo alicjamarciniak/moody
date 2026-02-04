@@ -12,13 +12,12 @@ import { useAuth } from '../context/AuthContext';
 import { saveNote } from '../services/noteService';
 import { colors } from '@/theme/colors';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { toDateKey } from '@/helpers/date';
 
-function toDateKey(date: Date): string {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
-}
+// TODO: Refactor
+// - replace hex colors with variables
+// - remove inline styles
+// - replace RN TextInput with custom component
 
 export default function NoteScreen() {
   const { t } = useTranslation();
@@ -52,8 +51,8 @@ export default function NoteScreen() {
     }
   };
 
-  const textColor = isDark ? '#f3f4f6' : '#1f2937';
-  const placeholderColor = isDark ? '#6b7280' : '#9ca3af';
+  const textColor = isDark ? colors.dirtyWhite : colors.darkGray;
+  const placeholderColor = isDark ? colors.midGray : colors.lightGray;
 
   return (
     <ScreenWrapper>

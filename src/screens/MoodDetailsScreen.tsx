@@ -17,6 +17,10 @@ import {
 } from '@/helpers/date';
 import { moodIcons } from '@/constants/moodIcons';
 
+// TODO: Refactor
+// - replace hex colors with variables
+// - remove inline styles
+
 export default function MoodDetailsScreen() {
   const { t } = useTranslation();
   const { isDark } = useTheme();

@@ -15,13 +15,7 @@ import { saveMood } from '../../services/moodService';
 import { useAuth } from '../../context/AuthContext';
 import MoodPill from './MoodPill';
 import { colors } from '@/theme/colors';
-
-function toDateKey(date: Date): string {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
-}
+import { toDateKey } from '@/helpers/date';
 
 const colorMap: Record<string, { light: string; dark: string }> =
   MOOD_KEYS.reduce(

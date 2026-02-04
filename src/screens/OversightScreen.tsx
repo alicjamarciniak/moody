@@ -1,5 +1,10 @@
 import React, { useState, useCallback } from 'react';
-import { View, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  ScrollView,
+  RefreshControl,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
@@ -17,6 +22,8 @@ import { ScreenWrapper } from '../components/ScreenWrapper';
 import { useTheme } from '../context/ThemeContext';
 import { InProgressBanner } from '../components/InProgressBanner';
 import { useMoods } from '../hooks/useMoods';
+import { colors } from '@/theme/colors';
+import { default as tColors } from 'tailwindcss/colors';
 
 type Tab = 'month' | 'year';
 
@@ -69,9 +76,9 @@ export default function OversightScreen() {
     { month: 'long', year: 'numeric' }
   );
 
-  const textColor = isDark ? '#f3f4f6' : '#1f2937';
-  const inactiveColor = isDark ? '#6b7280' : '#9ca3af';
-  const activeBg = isDark ? '#374151' : '#e5e7eb';
+  const textColor = isDark ? colors.light : colors.darkGray;
+  const inactiveColor = isDark ? colors.midGray : colors.lightGray;
+  const activeBg = isDark ? tColors.gray[700] : tColors.gray[200];
 
   return (
     <ScreenWrapper>
@@ -92,7 +99,9 @@ export default function OversightScreen() {
       {/* Tabs */}
       <View
         className="flex-row mx-5 mb-4 rounded-xl overflow-hidden"
-        style={{ backgroundColor: isDark ? '#1f2937' : '#f3f4f6' }}
+        style={{
+          backgroundColor: isDark ? colors.darkGray : colors.dirtyWhite,
+        }}
       >
         {(['month', 'year'] as Tab[]).map((tab) => (
           <TouchableOpacity
@@ -166,7 +175,7 @@ export default function OversightScreen() {
                 <FontAwesomeIcon
                   icon={faMagnifyingGlassChart as IconProp}
                   size={60}
-                  color={isDark ? '#6b7280' : '#9ca3af'}
+                  color={isDark ? colors.midGray : colors.lightGray}
                 />
                 <Text className="text-gray-500 dark:text-gray-400 text-center mt-6">
                   {t('home.noMoods')}

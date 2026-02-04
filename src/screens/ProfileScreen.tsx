@@ -13,6 +13,11 @@ import { useAuth } from '../context/AuthContext';
 import { AVATARS, AVATAR_IMAGES, AvatarKey } from '../types/user';
 import { updateUserProfile } from '../services/userService';
 import { colors } from '@/theme/colors';
+import { default as tColors } from 'tailwindcss/colors';
+
+// TODO: Refactor
+// - replace hex colors with variables
+// - remove inline styles
 
 export default function ProfileScreen() {
   const { t } = useTranslation();
@@ -29,7 +34,7 @@ export default function ProfileScreen() {
   const [isSaving, setIsSaving] = useState(false);
 
   const textColor = isDark ? '#f3f4f6' : '#1f2937';
-  const inputBg = isDark ? '#374151' : '#ffffff';
+  const inputBg = isDark ? tColors.gray[700] : '#ffffff';
   const inputBorder = isDark ? '#4b5563' : '#d1d5db';
   const placeholderColor = isDark ? '#6b7280' : '#9ca3af';
 
@@ -97,7 +102,10 @@ export default function ProfileScreen() {
                   height: selectedAvatar === key ? 60 : 56,
                   borderRadius: selectedAvatar === key ? 30 : 28,
                   borderWidth: selectedAvatar === key ? 5 : 1,
-                  borderColor: selectedAvatar === key ? '#f472b6' : inputBorder,
+                  borderColor:
+                    selectedAvatar === key
+                      ? colors.bubblegum[400]
+                      : inputBorder,
                 }}
               />
             </Pressable>

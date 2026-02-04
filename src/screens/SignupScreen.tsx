@@ -22,6 +22,10 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { colors } from '@/theme/colors';
 import { AVATARS, AVATAR_IMAGES, AvatarKey } from '../types/user';
 
+// TODO: Refactor:
+// - move TextInput to separate component with error message
+// - move validation check to validation helper
+
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type SignupScreenProps = NativeStackScreenProps<RootStackParamList, 'Signup'>;
@@ -63,7 +67,13 @@ export default function SignupScreen({ navigation }: SignupScreenProps) {
 
   const handleSignUp = async () => {
     setTouched({ email: true, password: true, confirmPassword: true });
-    if (!displayName.trim() || !email.trim() || !password.trim() || !confirmPassword.trim()) return;
+    if (
+      !displayName.trim() ||
+      !email.trim() ||
+      !password.trim() ||
+      !confirmPassword.trim()
+    )
+      return;
     if (!EMAIL_REGEX.test(email.trim())) return;
     if (password !== confirmPassword) return;
     setIsSubmitting(true);

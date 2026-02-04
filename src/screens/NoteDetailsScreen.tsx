@@ -13,6 +13,11 @@ import {
   getTimeStr,
   getWeekdayKey,
 } from '@/helpers/date';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+
+// TODO: Refactor
+// - replace hex colors with variables
+// - remove inline styles
 
 export default function NoteDetailsScreen() {
   const { t } = useTranslation();
@@ -36,7 +41,7 @@ export default function NoteDetailsScreen() {
       <View className="px-5 pt-4 pb-2 flex-row items-center gap-3">
         <TouchableOpacity onPress={() => navigation.goBack()} className="p-2">
           <FontAwesomeIcon
-            icon={faArrowLeft}
+            icon={faArrowLeft as IconProp}
             size={20}
             color={isDark ? '#d1d5db' : '#4b5563'}
           />
@@ -53,14 +58,22 @@ export default function NoteDetailsScreen() {
         <View className="p-6 rounded-2xl bg-white dark:bg-gray-800">
           {/* Title */}
           {note.title ? (
-            <Text weight="bold" className="text-xl mb-3" style={{ color: textColor }}>
+            <Text
+              weight="bold"
+              className="text-xl mb-3"
+              style={{ color: textColor }}
+            >
               {note.title}
             </Text>
           ) : null}
 
           {/* Date info */}
           <View className="flex-row items-center gap-1.5 mb-4">
-            <FontAwesomeIcon icon={dayTimeIcon} size={12} color={subTextColor} />
+            <FontAwesomeIcon
+              icon={dayTimeIcon}
+              size={12}
+              color={subTextColor}
+            />
             <Text className="text-sm" style={{ color: subTextColor }}>
               {timeStr}
             </Text>

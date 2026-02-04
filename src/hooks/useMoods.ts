@@ -17,7 +17,10 @@ export function getMostFrequentMood(entries: MoodEntry[]): string | null {
 
   for (const entry of entries) {
     counts[entry.label] = (counts[entry.label] || 0) + 1;
-    if (!latestTimestamp[entry.label] || entry.timestamp > latestTimestamp[entry.label]) {
+    if (
+      !latestTimestamp[entry.label] ||
+      entry.timestamp > latestTimestamp[entry.label]
+    ) {
       latestTimestamp[entry.label] = entry.timestamp;
     }
   }

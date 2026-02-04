@@ -10,6 +10,11 @@ import { SettingsDrawer } from '@/components/SettingsDrawer';
 import { useTheme } from '@/context/ThemeContext';
 import { useAuth } from '@/context/AuthContext';
 import { AVATAR_IMAGES } from '@/types/user';
+import { colors } from '@/theme/colors';
+
+// TODO: Refactor
+// - replace hex colors with variables
+// - remove inline styles
 
 const Header = () => {
   const { isDark } = useTheme();
@@ -33,7 +38,7 @@ const Header = () => {
                 height: 44,
                 borderRadius: 22,
                 borderWidth: 3,
-                borderColor: '#f472b6',
+                borderColor: colors.bubblegum[400],
               }}
             />
           )}
