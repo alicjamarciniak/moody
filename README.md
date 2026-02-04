@@ -43,7 +43,7 @@ A modern mood tracking mobile application that helps you monitor and understand 
 
 Download and install the latest APK:
 
-1. Download the APK file from: `[APK_LINK_TO_BE_ADDED]`
+1. Download the APK file from: [APK_LINK](https://expo.dev/accounts/marciniak.al/projects/moody/builds/786379ee-18a4-4212-a8e3-5ddd8b7817b2)
 2. On your Android device, go to Settings > Security
 3. Enable "Install from Unknown Sources" or "Allow from this source"
 4. Open the downloaded APK file and follow the installation prompts
